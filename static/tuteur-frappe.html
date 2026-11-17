@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tuteur de frappe AZERTY · Rehoboth Skills Academy</title>
+<meta name="description" content="Tuteur de frappe AZERTY gratuit de Rehoboth Skills Academy : 8 niveaux, de la position des doigts aux raccourcis Word et Excel, avec suivi de la vitesse et de la précision.">
+<meta property="og:title" content="Tuteur de frappe AZERTY · Rehoboth Skills Academy">
+<meta property="og:description" content="Apprenez à taper vite et sans regarder le clavier, des lettres aux raccourcis Word et Excel.">
+<meta property="og:image" content="apercu.png">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAF7F2;--fg:#181715;--mut:#5b5650;--ok:#15803d;--err:#b91c1c;--pink:#fde2e1;--fix:#b45309;--head:#181715;--title:#c2410c;--btn:#c2410c;--btnfg:#fff;--sec:#262524;--card:#F1ECE4;--line:#b9b2a7;--fs:28px}
+@media (prefers-color-scheme:dark){:root:not([data-theme]){--bg:#181715;--fg:#F4F1EC;--mut:#BDB8B0;--ok:#4ade80;--err:#ff6b8a;--pink:#4a1424;--fix:#fbbf24;--head:#11100f;--title:#F5894A;--btn:#C2410C;--btnfg:#fff;--sec:#2b2a28;--card:#262524;--line:#4a4642}}
+:root[data-theme="sombre"]{--bg:#181715;--fg:#F4F1EC;--mut:#BDB8B0;--ok:#4ade80;--err:#ff6b8a;--pink:#4a1424;--fix:#fbbf24;--head:#11100f;--title:#F5894A;--btn:#C2410C;--btnfg:#fff;--sec:#2b2a28;--card:#262524;--line:#4a4642}
+:root[data-theme="contraste"]{--bg:#000;--fg:#fff;--mut:#e5e7eb;--ok:#86efac;--err:#fecaca;--pink:#7f1d1d;--fix:#fde047;--head:#000;--title:#fde047;--btn:#fde047;--btnfg:#000;--sec:#fff;--card:#111;--line:#fff}
+:root[data-theme="contraste"] button.sec{color:#000}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+a{color:inherit}
+header{background:var(--head);color:#fff;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;justify-content:space-between}
+header b{font-size:17px}
+header nav{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:15px}
+header nav a,header nav button{color:#fff;background:none;border:0;padding:4px 0;min-height:auto;margin:0;font:inherit;cursor:pointer;text-decoration:underline}
+main{max-width:960px;margin:auto;padding:16px}
+h2{color:var(--title);margin:4px 0 10px;font-size:24px}
+h3{margin:18px 0 6px;color:var(--title)}
+.card{background:var(--card);border-radius:12px;padding:16px;margin-bottom:12px}
+button{font:inherit;border:0;border-radius:10px;padding:12px 18px;background:var(--btn);color:var(--btnfg);cursor:pointer;min-height:44px;margin:4px 4px 4px 0}
+button.sec{background:var(--sec);color:#fff}
+button.small{padding:6px 12px;min-height:36px;font-size:15px}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--btn);outline-offset:2px}
+input,select,textarea{font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+.lesson{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;background:var(--bg);color:var(--fg);text-align:left;border:1px solid var(--line)}
+.lesson.current{outline:3px solid var(--btn)}
+.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.big button{min-height:64px;font-size:18px;font-weight:700}
+#txt{font:var(--fs)/1.7 "Courier Prime","Courier New",monospace;letter-spacing:.04em;white-space:pre-wrap;word-break:break-word;max-height:calc(var(--fs)*1.7*3 + 6px);overflow:hidden;position:relative;margin:8px 0}
+#txt .ok{color:var(--ok)}
+#txt .todo{color:var(--mut)}
+#txt .bad{background:rgba(255,45,85,.22);color:#ff2d55;font-weight:700}
+#txt .fix{color:var(--fix);text-decoration:underline dotted}
+#txt .cur{color:var(--fg)}
+#txt .cur.err{background:#ff2d55;color:#fff}
+#stats{font-weight:600;margin:8px 0}
+#msg{min-height:26px;font-size:18px;color:var(--title)}
+#hint{color:var(--mut);font-size:17px}
+.tools{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+#kbwrap{overflow-x:auto}
+.kb{display:grid;gap:5px;justify-content:center;min-width:620px}
+.kbs{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.row{display:flex;gap:5px}
+.key{min-width:40px;height:44px;padding:0 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;border:1px solid #6b7280;font-weight:700;color:#111;position:relative;line-height:1.1;font-size:15px}
+.key small{font-size:11px;font-weight:400;color:#374151}
+.key.w2{min-width:70px;font-size:12px}.key.sp{min-width:260px}
+.key.rep::after{content:"";position:absolute;bottom:5px;width:12px;height:2px;background:#111}
+.key.next{background:var(--btn)!important;color:#fff;border:2px solid #000;transform:translateY(-1px)}
+.key.next small{color:#fff}
+.key.bad{background:#fca5a5!important}
+.f0{background:#fecaca}.f1{background:#fed7aa}.f2{background:#fef08a}.f3,.f4{background:#bbf7d0}.f5{background:#fef08a}.f6{background:#fed7aa}.f7{background:#fecaca}.f8{background:#e5e7eb}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:center;margin-top:8px;font-size:14px}
+.legend span{display:inline-flex;align-items:center;gap:4px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid #6b7280}
+.hidden{display:none!important}
+.editor{min-height:150px;border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--bg);font:18px/1.7 system-ui,sans-serif;white-space:pre-wrap;word-break:break-word}
+.editor .sel{background:var(--title);color:var(--bg)}
+.editor .cur{display:inline-block;width:2px;height:1.1em;background:var(--btn);vertical-align:text-bottom}
+.it{font-style:italic}.ul{text-decoration:underline}
+.stars{font-size:28px;color:var(--btn);margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--head);color:#fff}
+.tw{overflow-x:auto}
+.att{border:3px solid var(--title);border-radius:12px;padding:20px;background:var(--bg)}
+.note{color:var(--mut);font-size:15px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+.stat{background:var(--bg);border-radius:10px;padding:10px;border:1px solid var(--line)}
+.stat b{display:block;font-size:22px;color:var(--title)}
+@media print{
+  header,button,.noprint{display:none!important}
+  body.p-att main>*:not(#res){display:none!important}
+  body.p-att #res .card>*:not(.att){display:none!important}
+  .card{background:#fff}
+  body{background:#fff;color:#000}
+}
+
+/* ===== Animations de frappe ===== */
+#txtwrap{position:relative}
+#caret{position:absolute;left:0;top:0;width:3px;background:var(--title);border-radius:2px;pointer-events:none;opacity:0;transition:transform 70ms cubic-bezier(.25,.7,.3,1),opacity .15s;will-change:transform;z-index:2}
+#caret.on{opacity:1;animation:clignote 1.1s step-end infinite}
+#caret.on.tape{animation:none}
+@keyframes clignote{0%,100%{opacity:1}50%{opacity:0}}
+#txtwrap.secoue{animation:secoue .32s ease-in-out}
+@keyframes secoue{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-2px)}80%{transform:translateX(2px)}}
+#txt .pop{animation:pop .22s ease-out}
+@keyframes pop{0%{text-shadow:0 0 12px var(--ok)}100%{text-shadow:0 0 0 transparent}}
+.key{transition:transform .08s,box-shadow .08s,background-color .15s,filter .08s}
+.key.press{transform:translateY(3px);box-shadow:inset 0 3px 0 rgba(0,0,0,.35);filter:brightness(.88)}
+#hand{display:flex;flex-direction:column;align-items:center;margin:0 0 10px}
+#hand svg{width:min(340px,80%);height:auto}
+#hand rect{fill:var(--mut);fill-opacity:.22;transition:fill .18s,fill-opacity .18s,filter .18s}
+#hand rect.palm{fill-opacity:.12}
+#hand rect.on{fill:var(--btn);fill-opacity:1;filter:drop-shadow(0 0 6px var(--btn))}
+#doigt{min-height:1.4em;margin:4px 0 0;font-weight:600;color:var(--title)}
+.jauge{position:relative;height:24px;border-radius:999px;background:var(--card);border:1px solid var(--line);overflow:hidden;margin:8px 0 14px}
+.jauge span{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--ok),var(--title));border-radius:999px;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.jauge b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--fg);text-shadow:0 0 4px var(--bg)}
+.confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:900}
+@media (prefers-reduced-motion:reduce){
+  #caret.on,#txtwrap.secoue,#txt .pop{animation:none}
+  #caret{transition:none}
+  .jauge span,.key,#hand rect{transition:none}
+}
+
+/* ===== Graphique de vitesse par exercice ===== */
+.vit{margin:8px 0 4px}
+.vit-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}
+.vit-top h3{margin:10px 0 6px}
+.vit-top select{min-width:240px}
+.plot-row{display:flex;gap:6px;height:230px;padding-top:6px;border-bottom:2px solid var(--line);overflow-x:auto}
+.col{flex:1 0 44px;display:flex;flex-direction:column;min-width:0}
+.plot{position:relative;flex:1}
+.bar{position:absolute;left:20%;right:20%;bottom:0;height:0;border-radius:8px 8px 2px 2px;background:linear-gradient(to top,var(--btn),var(--title));transition:height .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.dot{position:absolute;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--fg);border:2px solid var(--bg);bottom:0;transition:bottom .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.val{position:absolute;left:0;right:0;text-align:center;font-size:12px;font-weight:700;color:var(--fg);bottom:0;transition:bottom .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.col small{text-align:center;font-size:12px;color:var(--mut);margin-top:6px;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.bar,.dot,.val{transition:none}}
+
+/* ===== Thème Carter ===== */
+@property --angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+:root[data-theme="clair"]{--bg:#FAF7F2;--fg:#181715;--mut:#5b5650;--ok:#15803d;--err:#b91c1c;--pink:#fde2e1;--fix:#b45309;--head:#181715;--title:#c2410c;--btn:#c2410c;--btnfg:#fff;--sec:#262524;--card:#F1ECE4;--line:#b9b2a7}
+body{font-family:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;transition:background .3s,color .3s}
+h1,h2,h3{font-family:"Comfortaa","Figtree",system-ui,sans-serif}
+h2,h3{color:var(--fg)}
+:root:not([data-theme="contraste"]) ::selection{background:#E8651A;color:#fff}
+/* Cadre animé autour de chaque écran */
+body::after{content:"";position:fixed;inset:10px;border-radius:24px;pointer-events:none;z-index:50;padding:1px;
+  background:conic-gradient(from var(--angle),transparent 0deg,rgba(232,101,26,.95) 45deg,transparent 100deg,transparent 200deg,rgba(232,101,26,.45) 240deg,transparent 290deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:tourne 9s linear infinite}
+:root[data-theme="contraste"] body::after{display:none}
+/* En-tête : liseré animé et effet de verre */
+header{position:sticky;top:0;z-index:40;background:rgba(24,23,21,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+:root[data-theme="contraste"] header{background:#000;backdrop-filter:none}
+header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,transparent,#E8651A,#fff3,#E8651A,transparent);background-size:200% 100%;animation:glisse 4s linear infinite;pointer-events:none}
+/* Boutons en pilule, cohérents avec le site */
+button{border-radius:999px;padding:11px 20px;transition:transform .2s ease,box-shadow .25s ease,background .2s}
+button:hover{transform:translateY(-1px);box-shadow:0 10px 26px -10px rgba(232,101,26,.7)}
+button.sec{background:var(--sec);color:#fff;border:1px solid var(--line)}
+button.sec:hover{border-color:#E8651A}
+:root[data-theme="contraste"] button{box-shadow:none;transform:none}
+/* Cartes à bordure animée */
+.card{position:relative;isolation:isolate;border-radius:18px;transition:transform .35s ease,box-shadow .35s ease}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:-1;opacity:.35;transition:opacity .4s ease;
+  background:conic-gradient(from var(--angle),transparent 0deg,transparent 230deg,#E8651A 300deg,#fff5 330deg,transparent 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:tourne 6s linear infinite}
+.card:hover::before{opacity:1}
+:root[data-theme="contraste"] .card::before{display:none}
+/* Tableaux et sélecteurs */
+.tw,table{border-radius:12px}
+select,input,textarea{border-radius:10px}
+:root[data-theme="contraste"] .card{border-radius:12px}
+/* Animations du thème */
+@keyframes tourne{to{--angle:360deg}}
+@keyframes glisse{to{background-position:200% 0}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header>
+  <b>Tuteur de frappe AZERTY · Rehoboth Skills Academy</b>
+  <nav aria-label="Liens du tuteur">
+    <span id="who-h"></span>
+    <a href="/">← Retour au site</a>
+    <button type="button" onclick="feedbackOpen()">Signaler un problème</button>
+  </nav>
+</header>
+<main id="contenu">
+
+  <!-- PROFILS -->
+  <section id="login">
+    <div class="card">
+      <h2>Bienvenue</h2>
+      <p>Choisissez votre profil, ou créez-en un. Votre progression est enregistrée <b>dans le navigateur de cet ordinateur</b>. Le code à 4 chiffres évite qu'un autre apprenant utilise votre profil sur un poste partagé.</p>
+      <div id="plist"></div>
+      <div id="pform"></div>
+      <p><button class="sec" onclick="newProfileForm()">Créer mon profil</button></p>
+    </div>
+  </section>
+
+  <!-- ACCUEIL -->
+  <section id="home" class="hidden">
+    <div class="card">
+      <h2 id="hello"></h2>
+      <div class="big">
+        <button id="cont">Continuer ma leçon</button>
+        <button class="sec" onclick="showProg()">Mes progrès</button>
+        <button class="sec" onclick="freePractice()">S'entraîner librement</button>
+        <button class="sec" onclick="revision()">Réviser mes touches faibles</button>
+      </div>
+      <details style="margin-top:10px"><summary><b>Conseils de posture</b></summary>
+        <ul>
+          <li>Dos droit, pieds à plat, écran à hauteur des yeux, à environ 60 cm.</li>
+          <li>Poignets souples, sans les poser sur le bord du clavier pendant la frappe.</li>
+          <li>Index gauche sur <b>F</b>, index droit sur <b>J</b> : ces deux touches ont un petit relief.</li>
+          <li>Les autres doigts : <b>Q S D</b> à gauche, <b>K L M</b> à droite ; les pouces sur la barre d'espace.</li>
+          <li>Faites une pause de quelques minutes toutes les 20 minutes.</li>
+          <li>Utilisez un ordinateur avec un vrai clavier : le tuteur ne fonctionne pas sur téléphone.</li>
+        </ul>
+      </details>
+    </div>
+    <div id="list"></div>
+  </section>
+
+  <!-- EXERCICE DE FRAPPE -->
+  <section id="ex" class="hidden">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center">
+        <b id="title"></b>
+        <button class="sec small" onclick="quitEx()">✕ Quitter</button>
+      </div>
+      <p id="intro" class="note"></p>
+      <div id="txtwrap"><div id="txt" aria-live="off"></div><span id="caret" aria-hidden="true"></span></div>
+      <div id="stats"></div>
+      <div id="msg" role="status"></div>
+      <div id="hint"></div>
+      <div class="tools noprint">
+        <button class="sec small" onclick="fontStep(-4)" aria-label="Réduire le texte">A−</button>
+        <button class="sec small" onclick="fontStep(4)" aria-label="Agrandir le texte">A+</button>
+        <button class="sec small" id="kbtog" onclick="toggleKb()">Masquer le clavier</button>
+        <button class="sec small" onclick="toggleDots()" id="dottog">Masquer les points d'espace</button>
+        <button class="sec small" id="nptog" onclick="toggleNumpad()">Mon ordinateur n'a pas de pavé numérique</button>
+      </div>
+    </div>
+    <div class="card" id="kbcard"><div id="hand" aria-hidden="true"><svg viewBox="0 0 420 170" role="presentation" focusable="false"><rect class="palm" x="8" y="110" width="152" height="52" rx="24"/><rect class="d0" x="14" y="62" width="28" height="60" rx="14"/><rect class="d1" x="50" y="40" width="28" height="82" rx="14"/><rect class="d2" x="86" y="30" width="28" height="92" rx="14"/><rect class="d3" x="122" y="42" width="28" height="80" rx="14"/><rect class="d8" x="160" y="92" width="26" height="60" rx="13" transform="rotate(-25 173 122)"/><rect class="palm" x="260" y="110" width="152" height="52" rx="24"/><rect class="d4" x="274" y="42" width="28" height="80" rx="14"/><rect class="d5" x="308" y="30" width="28" height="92" rx="14"/><rect class="d6" x="342" y="40" width="28" height="82" rx="14"/><rect class="d7" x="378" y="62" width="28" height="60" rx="14"/><rect class="d8" x="234" y="92" width="26" height="60" rx="13" transform="rotate(25 247 122)"/></svg><p id="doigt" class="note"></p></div><div id="kbwrap"></div></div>
+  </section>
+
+  <!-- RACCOURCIS (NIVEAU 6) -->
+  <section id="sc" class="hidden">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><b id="sc-title"></b><button class="sec small" onclick="home()">✕ Quitter</button></div>
+      <p id="sc-prompt" style="font-size:20px;font-weight:700"></p>
+      <div id="sc-quiz"></div>
+      <div id="sc-msg" role="status" style="min-height:26px;color:var(--title)"></div>
+      <p id="sc-step" class="note"></p>
+    </div>
+    <div class="card"><div id="doc" class="editor"></div><p class="note">Éditeur simulé : les raccourcis agissent dans ce cadre, pas dans le navigateur. Si une fenêtre du navigateur s'ouvre malgré tout, fermez-la et continuez.</p></div>
+  </section>
+
+  <!-- RÉSULTATS -->
+  <section id="res" class="hidden"><div class="card" id="resbody"></div></section>
+
+  <!-- MES PROGRÈS -->
+  <section id="prog" class="hidden"><div class="card" id="progbody"></div></section>
+
+  <!-- SIGNALER UN PROBLÈME -->
+  <section id="fb" class="hidden"><div class="card">
+    <h3>Signaler un problème</h3>
+    <p>Décrivez ce qui s'est passé (écran, action, résultat attendu). Les informations techniques sont déjà ajoutées.</p>
+    <textarea id="fb-txt" rows="8" style="width:100%"></textarea>
+    <p><button onclick="fbWhatsApp()">Envoyer sur WhatsApp</button> <button class="sec" onclick="fbMail()">Envoyer par e-mail</button> <button class="sec" onclick="fbCopy()">Copier le message</button> <button class="sec" onclick="back()">Retour</button></p>
+    <p id="fb-msg" role="status" style="color:var(--title)"></p>
+    <p class="note">Contact : <b>rehobothskillsacademy@gmail.com</b> · WhatsApp <b>+225 01 03 73 00 14</b></p>
+    <p class="note"><b>Limites connues :</b> sur certains navigateurs, F1, F7 ou F12 peuvent ouvrir une fenêtre du navigateur ; la progression n'est pas partagée entre ordinateurs (utilisez l'export et l'import dans « Mes progrès »).</p>
+  </div></section>
+</main>
+
+<script>
+'use strict';
+const VERSION='1.0 bêta';
+const WA='2250103730014';
+const MAIL='rehobothskillsacademy@gmail.com';
+
+// ============ CONTENU DES LEÇONS ============
+// Modes : blocage (par défaut), continu, corrige (correction autorisée), examen.
+const LV={0:'Découverte et posture',1:'Rangée de base',2:'Rangée supérieure',3:'Rangée inférieure',4:'Majuscules, accents et ponctuation',5:'Chiffres et symboles',6:'Touches de fonction et raccourcis',7:'Textes professionnels'};
+const LESSONS=[
+  {id:'0.1',name:'Posture et position des doigts',intro:'Dos droit, poignets souples. Posez l’index gauche sur F et l’index droit sur J (les touches avec un petit relief), puis les autres doigts sur Q S D et K L M. Les pouces restent sur la barre d’espace.',texts:['ffff jjjj ffff jjjj','qsdf jklm qsdf jklm','fjfj dkdk slsl qmqm']},
+  {id:'0.2',name:'Test de positionnement',diag:true,mode:'continu',intro:'Tapez ce texte comme vous pouvez, sans vous presser. Ce test mesure seulement votre point de départ : il est toujours validé.',texts:['Bonjour, je suis en formation pour apprendre à taper vite et sans erreur.']},
+  {id:'1.1',name:'F, J, Espace',texts:['fff jjj fj jf fjf jfj','fjf jfj ff jj fj','jjf ffj fjj jff','fj fj jf jf ffjj jjff']},
+  {id:'1.2',name:'D, K',texts:['dkd kdk fdjk dfjk','dk kd dkd kdk','fdk jkd dfj kjf','kddk dkkd fjdk jfkd']},
+  {id:'1.3',name:'S, L',texts:['sls lsl sdfjkl','ls sl sls lsl','slf jls dsk lks','sdf lkj sdl fks']},
+  {id:'1.4',name:'Q, M',texts:['qmq mqm qsdf jklm','mq qm qmq mqm','qsm mlq qfm jmq','qsdf jklm mlkj fdsq']},
+  {id:'1.5',name:'G, H',texts:['fgf jhj gh hg','gh hg fgf jhj','fgh jhg ghj hgf','dgh khg sgh lhg']},
+  {id:'1.6',name:'Révision de la rangée de base',texts:['qsdf jklm gh fjdk slqm hg','fjdk sl qm gh fj dk','ghjk dfgh sdfg hjkl','qsdfg hjklm mlkjh gfdsq']},
+  {id:'2.1',name:'E, I',mode:'continu',minWpm:10,target:10,texts:['eid fed jeid kedi eif lied','ief fei ded kid ie ei','fief diede kif lied','elle mile file emile']},
+  {id:'2.2',name:'R, U',mode:'continu',minWpm:10,target:10,texts:['fur dur rj ruj jur fru','rud urd dur sur ruj ru','rue sure dure lire','mur fier jure rise']},
+  {id:'2.3',name:'T, Y',mode:'continu',minWpm:10,target:10,texts:['fty jyt tyt dty ftj','ty yt dty jty ytf','tete tuer tir style','tes lit dite yeti']},
+  {id:'2.4',name:'Z, O',mode:'continu',minWpm:10,target:10,texts:['zoz ozo fzo jzo dko zodj','zo oz zoz ozo','zero rose dos mot','zoo homme lotus stylo']},
+  {id:'2.5',name:'A, P',mode:'continu',minWpm:10,target:10,texts:['aqa pap ape apa aqp','sapa pape paq sap','papa patte tapis pomme','page plat repas mardi']},
+  {id:'2.6',name:'Révision et mots',mode:'continu',minWpm:10,target:10,texts:['tarte rideau poste zoom jupes','ruse tapis zoo pirate adieu','le stylo est sur la photo','je reste assis pour toujours']},
+  {id:'3.1',name:'W, X',mode:'continu',minWpm:15,target:15,texts:['wxw xwx sws xzx wxwx','wx xw wxw xwx sxw','taxi kiwi luxe exil','axe fixe roux taxi']},
+  {id:'3.2',name:'C, V',mode:'continu',minWpm:15,target:15,texts:['cvc vcv cfv dcv','cv vc cvc vcv','cave vrac cite avec','vie voix coude cric']},
+  {id:'3.3',name:'B, N',mode:'continu',minWpm:15,target:15,texts:['bnb nbn fbn jnb','bn nb bnb nbn','bon nez banc bien','bonne note du jour']},
+  {id:'3.4',name:', ; : !',mode:'continu',minWpm:15,target:15,texts:['f, j; d: k! s, l;','k, j: f; d! s:','oui, non; voici: bravo!','car, donc; mais: enfin!']},
+  {id:'3.5',name:'Mots courants',mode:'continu',minWpm:15,target:15,texts:['bonjour, navire, convoi, vendredi','bon convoi, navire, vendredi, nous voici','le bureau ouvre lundi matin','nous avons un cours de bureautique']},
+  {id:'4.1',name:'Majuscules',mode:'continu',minWpm:15,target:15,texts:['Sal Dal Fak Jak Kal Lad','Fad Sad Dad Lad Jad Kad','Aya Koffi Oscar Yao','Abidjan Yopougon Bouake Man']},
+  {id:'4.2',name:'é è à ç ù',mode:'continu',minWpm:15,target:15,texts:['é è à é è à ç ù','ça là où été','déjà élève leçon père','très près voilà reçu']},
+  {id:'4.3',name:'ê â î ô ë ï',mode:'continu',minWpm:15,target:15,texts:['être âge île hôte','Noël naïf','fenêtre tâche maître côte','forêt pâte dîner rôle']},
+  {id:'4.4',name:'Ponctuation française',mode:'continu',minWpm:15,target:15,texts:['Bonjour ! Ça va ?','Oui : merci ; à bientôt !','Avez-vous fini ? Pas encore !','Attention : le cours commence !']},
+  {id:'4.5',name:'Majuscules accentuées',mode:'continu',minWpm:15,target:15,texts:['Émile est à Lomé !','Élise a été à Abidjan ?','À demain, Éric !','Ça commence à Yopougon.']},
+  {id:'4.6',name:'Révision niveau 4',mode:'continu',minWpm:15,target:15,texts:['Ça va ? Élise à Abidjan !','Oui ! Émile a été à Lomé ; merci !','Être prêt : voilà la clé du succès.','Noël approche ; à bientôt, chère Aïcha !']},
+  {id:'5.1',name:'Pavé numérique (4 5 6)',keypad:true,mode:'continu',minPrec:92,minWpm:15,target:15,texts:['456 456 546 645','5 4 6 5 4 6','44 55 66 456 654','465 564 645 546']},
+  {id:'5.2',name:'Pavé complet et opérateurs',keypad:true,mode:'continu',minPrec:92,minWpm:15,target:15,texts:['1+2 3-4 5*6 7/8 9.5','0+9 8-7 6*5 4/3','123 456 789 0','12.5+7.5 30/6 4*25']},
+  {id:'5.3',name:'Chiffres 1 à 5 (Maj)',mode:'continu',minPrec:92,minWpm:15,target:15,texts:['12345 54321 13524','1 2 3 4 5','21 43 15 32 54','135 241 352 413']},
+  {id:'5.4',name:'Chiffres 6 à 0 (Maj)',mode:'continu',minPrec:92,minWpm:15,target:15,texts:['67890 09876 60798','6 7 8 9 0','76 98 60 87 09','678 906 780 069']},
+  {id:'5.5',name:'Symboles',mode:'continu',minPrec:92,minWpm:15,target:15,texts:['& é " ( - è _ ç à ) =','@ # € @ # €',"l'élève (Aya) = 1re",'prix : 25 € ; code # 12']},
+  {id:'5.6',name:'Données réelles',mode:'continu',minPrec:92,minWpm:15,target:15,texts:['13/11/2026 125 000 FCFA','+225 01 03 73 00 14 rehobothskillsacademy@gmail.com','Facture 2026-015 : 45 000 FCFA','Rendez-vous le 20/12/2026 à 9h30']},
+  {id:'6.1',name:'Édition de base',ch:[{p:'Validez la ligne : appuyez sur Entrée',k:'enter'},{p:'Supprimez le caractère avant le curseur',k:'backspace'},{p:'Supprimez le caractère après le curseur',k:'delete'},{p:'Passez au champ suivant',k:'tab'},{p:'Annulez la sélection',k:'escape',pre:[0,7]}],texts:['raccourcis']},
+  {id:'6.2',name:'Navigation',ch:[{p:'Allez à la fin de la ligne',k:'end'},{p:'Allez au début de la ligne',k:'home'},{p:'Allez en bas du document',k:'ctrl+end'},{p:'Remontez d’une page',k:'pageup'},{p:'Déplacez le curseur vers la droite',k:'arrowright'}],texts:['raccourcis']},
+  {id:'6.3',name:'Sélection',ch:[{p:'Sélectionnez le caractère à gauche',k:'shift+arrowleft'},{p:'Sélectionnez jusqu’au mot suivant',k:'ctrl+shift+arrowright'},{p:'Sélectionnez jusqu’au début de la ligne',k:'shift+home'},{p:'Sélectionnez tout le document',k:'ctrl+a'}],texts:['raccourcis']},
+  {id:'6.4',name:'Presse-papiers et annulation',ch:[{p:'Copiez le mot sélectionné « Bonjour »',k:'ctrl+c',pre:[0,7]},{p:'Coupez le mot sélectionné « Bonjour »',k:'ctrl+x',pre:[0,7]},{p:'Collez à la position du curseur',k:'ctrl+v'},{p:'Annulez la dernière action',k:'ctrl+z'},{p:'Rétablissez l’action annulée',k:'ctrl+y'},{p:'Sélectionnez tout',k:'ctrl+a'}],texts:['raccourcis']},
+  {id:'6.5',name:'Fichier et mise en forme',ch:[{p:'Enregistrez le document',k:'ctrl+s'},{p:'Imprimez',k:'ctrl+p'},{p:'Quelle combinaison crée un nouveau document ?',q:true,o:['ctrl+n','ctrl+o','ctrl+w'],k:'ctrl+n'},{p:'Ouvrez un document',k:'ctrl+o'},{p:'Recherchez un mot',k:'ctrl+f'},{p:'Mettez en italique',k:'ctrl+i'},{p:'Soulignez',k:'ctrl+u'},{p:'Atteignez une page',k:'ctrl+g'}],texts:['raccourcis']},
+  {id:'6.6',name:'Touches de fonction',note:'Sur certains portables, maintenez Fn pour utiliser F1–F12.',ch:[{p:'Ouvrez l’aide',k:'f1'},{p:'Modifiez la cellule',k:'f2'},{p:'Répétez la dernière action',k:'f4'},{p:'Actualisez',k:'f5'},{p:'Vérifiez l’orthographe',k:'f7'},{p:'Enregistrez sous',k:'f12'}],texts:['raccourcis']},
+  {id:'6.7',name:'Fenêtres et poste',note:'Alt+Tab et la touche Windows sont gérés par le système : quiz visuel.',ch:[{p:'Quelle combinaison bascule entre les fenêtres ?',q:true,o:['alt+tab','win+d','ctrl+z'],k:'alt+tab'},{p:'Quelle combinaison affiche le bureau ?',q:true,o:['win+d','win+e','alt+f4'],k:'win+d'},{p:'Quelle combinaison ouvre l’explorateur de fichiers ?',q:true,o:['win+e','win+l','ctrl+e'],k:'win+e'},{p:'Quelle combinaison verrouille le poste ?',q:true,o:['win+l','alt+l','ctrl+l'],k:'win+l'}],texts:['raccourcis']},
+  {id:'7.1',name:'Courriers',mode:'corrige',minPrec:92,minWpm:25,target:25,texts:['Madame, Monsieur, je vous prie de bien vouloir accepter ma demande de congé du 2 au 6 décembre. Veuillez agréer, Madame, Monsieur, mes salutations distinguées.','Objet : demande de rendez-vous. Je reste à votre disposition pour toute information complémentaire. Cordialement, Oscar Vadjebo.']},
+  {id:'7.2',name:'Factures et bons de commande',mode:'corrige',minPrec:92,minWpm:25,target:25,texts:['Facture 2026-014 : 3 cahiers à 2 500 FCFA, soit 7 500 FCFA ; 2 stylos à 300 FCFA, soit 600 FCFA. Total TTC : 8 100 FCFA.','Bon de commande : 10 rames de papier A4 à 3 500 FCFA le paquet, livraison prévue le 20/11/2026. Merci de confirmer la quantité.']},
+  {id:'7.3',name:'Comptes rendus de réunion',mode:'corrige',minPrec:92,minWpm:25,target:25,texts:['Compte rendu de réunion du 12/11/2026. Présents : Aya, Oscar, Koffi. Ordre du jour : planning des formations ; achat de matériel ; bilan de la semaine.','Décisions : la formation Excel débutera lundi. Actions : Koffi envoie la convocation avant vendredi. Prochaine réunion : jeudi à 15 heures.']},
+  {id:'7.4',name:'Tableaux',mode:'corrige',minPrec:92,minWpm:25,target:25,texts:['Nom : Aya ; Niveau : 5 ; Vitesse : 24 mots/min ; Précision : 95 %.','Nom : Koffi ; Niveau : 3 ; Vitesse : 18 mots/min ; Précision : 91 %.']},
+  {id:'7.5',name:'Courriels professionnels',mode:'corrige',minPrec:92,minWpm:25,target:25,texts:['Bonjour, je vous envoie en pièce jointe le devis demandé. Merci de me confirmer la réception. Bien cordialement, Oscar.','Bonjour Aya, la formation commence lundi à 9 heures. Pensez à apporter votre carte nationale et votre numéro WhatsApp. Merci.']},
+  {id:'7.6',name:'Test final de certification',mode:'examen',exam:true,minPrec:95,minWpm:35,target:35,intro:'5 minutes, sans clavier affiché et sans retour arrière. Objectif : 35 mots/min et 95 % de précision.',texts:['Yopougon, le 14 novembre 2026. Madame, Monsieur, nous avons le plaisir de vous confirmer votre inscription à la formation bureautique. Le programme comprend Word, Excel, PowerPoint et un module sur le numérique. Les cours débutent le lundi 16 novembre à 9 heures. Merci de vous munir de votre carte nationale et de votre numéro WhatsApp. Veuillez agréer, Madame, Monsieur, nos salutations distinguées. Rehoboth Skills Academy.']}
+];
+
+// Poids des erreurs (cahier des charges § 6.3)
+const W={substitution:1,omission:1,insertion:1,transposition:1.5,casse:.5,accent:.5,espace:.5,chiffre:2};
+const TYPES=Object.keys(W);
+const TLAB={substitution:'mauvaise touche',omission:'oubli',insertion:'caractère en trop',transposition:'inversion',casse:'majuscule',accent:'accent',espace:'espace',chiffre:'chiffre'};
+
+// ============ ANIMATIONS DE FRAPPE ============
+const reduit=()=>window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Curseur fluide : il glisse vers la lettre suivante au lieu de sauter
+function moveCaret(){
+  const car=$('caret'),w=$('txtwrap'),tx=$('txt');
+  const c=tx.querySelector('.cur');
+  if(!car||!c){car.classList.remove('on');return}
+  const wr=w.getBoundingClientRect(),r=c.getBoundingClientRect(),tr=tx.getBoundingClientRect();
+  if(r.top<tr.top-1||r.bottom>tr.bottom+1){car.classList.remove('on');return}
+  car.style.height=(r.height*0.9)+'px';
+  const x=r.left-wr.left,y=r.top-wr.top+r.height*0.05;
+  if(!car.dataset.placed){car.style.transition='none';car.style.transform=`translate(${x}px,${y}px)`;car.dataset.placed=1;requestAnimationFrame(()=>car.style.transition='');}
+  else car.style.transform=`translate(${x}px,${y}px)`;
+  car.classList.add('on','tape');
+  clearTimeout(car._t);car._t=setTimeout(()=>car.classList.remove('tape'),500);
+}
+
+// Secousse horizontale sur erreur, sans bloquer la saisie
+function secoue(){
+  const w=$('txtwrap');if(!w||reduit())return;
+  w.classList.remove('secoue');void w.offsetWidth;w.classList.add('secoue');
+}
+
+// Doigts à utiliser pour un caractère (Maj : auriculaire opposé + doigt de la lettre ; AltGr et espace : pouce)
+function doigtsPour(c){
+  if(!c)return [];
+  if(c===' ')return [8];
+  const v=DEAD[c]?DEAD[c][0]:c;
+  const k=KEYMAP[v];
+  if(!k)return [];
+  if(k.m==='shift')return [k.f<=3?7:0,k.f];
+  if(k.m==='altgr')return [8,k.f];
+  return [k.f];
+}
+
+// Main semi-transparente : met en évidence le doigt à utiliser pour la prochaine lettre
+function majMain(c){
+  const ds=doigtsPour(c);
+  document.querySelectorAll('#hand rect').forEach(r=>{
+    r.classList.toggle('on',ds.some(n=>r.classList.contains('d'+n)));
+  });
+  const p=$('doigt');
+  if(p)p.textContent=ds.length?'Doigt à utiliser : '+ds.map(n=>FN[n]).join(' + '):'';
+}
+
+// Touche enfoncée en temps réel sur le clavier affiché
+function pressKey(c){
+  if(reduit())return;
+  let ids=[];
+  try{ids=guide(c,cur&&cur.L.keypad).ids||[]}catch(e){return}
+  document.querySelectorAll('#kbwrap .key').forEach(el=>{
+    if(ids.includes(el.dataset.id)){
+      el.classList.add('press');
+      setTimeout(()=>el.classList.remove('press'),120);
+    }
+  });
+}
+
+// Récompense discrète : confettis légers (fin d'exercice) ou plus marqués (passage de niveau)
+function confettis(n,duree){
+  if(reduit())return;
+  const cv=document.createElement('canvas');
+  cv.className='confetti';cv.width=innerWidth;cv.height=innerHeight;
+  document.body.appendChild(cv);
+  const ctx=cv.getContext('2d');
+  const couleurs=['#E8651A','#F5894A','#1e3a5f','#93c5fd','#4ade80','#fbbf24'];
+  const parts=Array.from({length:n},()=>({
+    x:innerWidth/2+(Math.random()-.5)*240,y:innerHeight*.35,
+    vx:(Math.random()-.5)*9,vy:-Math.random()*9-3,
+    r:Math.random()*Math.PI*2,vr:(Math.random()-.5)*.3,
+    w:6+Math.random()*6,h:3+Math.random()*4,
+    c:couleurs[Math.floor(Math.random()*couleurs.length)]
+  }));
+  const t0=performance.now();
+  (function frame(t){
+    const dt=t-t0;
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.globalAlpha=Math.max(0,1-dt/duree);
+    parts.forEach(p=>{
+      p.vy+=.25;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);
+      ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();
+    });
+    if(dt<duree)requestAnimationFrame(frame);else cv.remove();
+  })(t0);
+}
+
+// Jauge de note : se remplit au passage sur la page de résultats
+function jauge(note){
+  const d=document.createElement('div');
+  d.className='jauge';d.setAttribute('role','img');d.setAttribute('aria-label',`Note ${fr(note,1)} sur 20`);
+  d.innerHTML=`<span></span><b>${fr(note,1)} / 20</b>`;
+  $('resbody').prepend(d);
+  const bar=d.querySelector('span');
+  if(reduit()){bar.style.width=(note/20*100)+'%';return}
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.width=(note/20*100)+'%'}));
+}
+
+// ============ GRAPHIQUE DE VITESSE PAR EXERCICE ============
+let VIT_LECON=null;
+// Meilleure vitesse nette (barre) et dernière tentative (point) pour chaque exercice d'une leçon
+function chartVitesse(){
+  const ok=x=>x.net>0&&x.mode!=='raccourcis';
+  const avec=LESSONS.filter(L=>P.__h.some(x=>x.l===L.id&&ok(x)));
+  if(!avec.length)return '<div id="vitbox" class="vit"><h3>Vitesse par exercice</h3><p class="note">Le graphique apparaîtra après votre premier exercice terminé.</p></div>';
+  const L=avec.find(x=>x.id===VIT_LECON)||avec[avec.length-1];
+  VIT_LECON=L.id;
+  const best={},last={};
+  P.__h.filter(x=>x.l===L.id&&ok(x)).forEach(x=>{best[x.ex]=Math.max(best[x.ex]||0,x.net);last[x.ex]=x.net});
+  const max=Math.max(10,...Object.values(best))*1.12;
+  let cols='';
+  for(let k=1;k<=L.texts.length;k++){
+    const b=best[k],l=last[k];
+    const hp=b?b/max*100:0, dp=l?l/max*100:null;
+    cols+=`<div class="col" style="--i:${k-1}"><div class="plot">`
+      +`<span class="bar" data-h="${hp}%" style="height:0"></span>`
+      +(b?`<span class="val" data-bot="calc(${hp}% + 6px)" style="bottom:0" title="Meilleure : ${fr(b)} mots/min">${fr(b)}</span>`:'')
+      +(dp!==null?`<span class="dot" data-bot="calc(${dp}% - 5px)" style="bottom:0" title="Dernière : ${fr(l)} mots/min"></span>`:'')
+      +`</div><small>Ex. ${k}</small></div>`;
+  }
+  const options=avec.map(x=>`<option value="${esc(x.id)}"${x.id===L.id?' selected':''}>${esc(x.id)} · ${esc(x.name)}</option>`).join('');
+  return `<div id="vitbox" class="vit">
+  <div class="vit-top"><h3>Vitesse par exercice</h3>
+    <select id="vit-sel" aria-label="Choisir la leçon" onchange="VIT_LECON=this.value;$('vitbox').outerHTML=chartVitesse();animerVitesse()">${options}</select></div>
+  <div class="plot-row" role="img" aria-label="Vitesse nette par exercice : ${esc(L.name)}">${cols}</div>
+  <p class="note">Mots par minute nets. Barre orange : meilleure vitesse sur l’exercice. Point : dernière tentative.</p>
+</div>`;
+}
+// Fait monter les barres et descendre les repères : on applique les valeurs après le rendu
+function animerVitesse(){
+  const box=$('vitbox');if(!box)return;
+  const aller=()=>{
+    box.querySelectorAll('[data-h]').forEach(e=>{e.style.height=e.dataset.h});
+    box.querySelectorAll('[data-bot]').forEach(e=>{e.style.bottom=e.dataset.bot});
+  };
+  if(reduit())aller();else requestAnimationFrame(()=>requestAnimationFrame(aller));
+}
+
+// ============ CLAVIER AZERTY ============
+// [touche, avec Maj, doigt (0 à 8), avec AltGr]
+const FN=['auriculaire gauche','annulaire gauche','majeur gauche','index gauche','index droit','majeur droit','annulaire droit','auriculaire droit','pouce'];
+const KB=[
+  [['²','',0],['&','1',0],['é','2',1,'~'],['"','3',2,'#'],["'",'4',3,'{'],['(','5',3,'['],['-','6',4,'|'],['è','7',4,'`'],['_','8',5,'\\'],['ç','9',6,'^'],['à','0',7,'@'],[')','°',7,']'],['=','+',7,'}']],
+  [['a','A',0],['z','Z',1],['e','E',2,'€'],['r','R',3],['t','T',3],['y','Y',4],['u','U',4],['i','I',5],['o','O',6],['p','P',7],['^','¨',7],['$','£',7]],
+  [['q','Q',0],['s','S',1],['d','D',2],['f','F',3],['g','G',3],['h','H',4],['j','J',4],['k','K',5],['l','L',6],['m','M',7],['ù','%',7],['*','µ',7]],
+  [['<','>',0],['w','W',0],['x','X',1],['c','C',2],['v','V',3],['b','B',3],['n','N',4],[',','?',4],[';','.',5],[':','/',6],['!','§',7]]
+];
+const NP=[['7','8','9','/'],['4','5','6','*'],['1','2','3','-'],['0','.','+']];
+const NPF={'7':4,'4':4,'1':4,'8':5,'5':5,'2':5,'9':6,'6':6,'3':6,'0':8,'.':6,'/':6,'*':7,'-':7,'+':7};
+const CAPS={'É':['é','0201'],'È':['è','0200'],'À':['à','0192'],'Ç':['ç','0199'],'Ù':['ù','0217']};
+const DEAD={'ê':['^','e'],'â':['^','a'],'î':['^','i'],'ô':['^','o'],'û':['^','u'],'ë':['¨','e'],'ï':['¨','i'],'ü':['¨','u'],'ä':['¨','a'],'ö':['¨','o'],'Ê':['^','E'],'Â':['^','A'],'Î':['^','I'],'Ô':['^','O']};
+const KEYMAP={};KB.forEach(r=>r.forEach(k=>{KEYMAP[k[0]]={id:'k'+k[0],b:k[0],f:k[2],m:''};if(k[1])KEYMAP[k[1]]=KEYMAP[k[1]]||{id:'k'+k[0],b:k[0],f:k[2],m:'shift'};if(k[3])KEYMAP[k[3]]=KEYMAP[k[3]]||{id:'k'+k[0],b:k[0],f:k[2],m:'altgr'}}));
+const shiftFor=f=>f<=3?'shiftR':'shiftL';
+const sideTxt=f=>f<=3?'droite':'gauche';
+// Touches à allumer et texte d'aide pour un caractère attendu
+function guide(c,keypad){
+  if(!c)return {ids:[],t:''};
+  if(c===' ')return {ids:['space'],t:'barre d’espace — pouce'};
+  if(keypad&&NPF[c]!==undefined&&!SET.noNumpad)return {ids:['n'+c],t:`pavé numérique — ${FN[NPF[c]]}${NPF[c]===8?' droit':''}`};
+  if(CAPS[c]){const k=KEYMAP[CAPS[c][0]];return {ids:['caps',k.id],t:`Verr Maj activé, puis touche ${CAPS[c][0]} (${FN[k.f]}) — ou Alt + ${CAPS[c][1]} sur le pavé numérique`}}
+  if(DEAD[c]){const[d,v]=DEAD[c];const k=KEYMAP[v];const up=v!==v.toLowerCase();if(d==='^'&&up)return {ids:['k^',shiftFor(k.f),k.id],t:`touche ^ (auriculaire droit), puis Maj ${sideTxt(k.f)} + ${v} (${FN[k.f]})`};return d==='^'?{ids:['k^',k.id],t:`touche ^ (auriculaire droit), puis ${v} (${FN[k.f]})`}:{ids:['shiftL','k^',k.id],t:`Maj gauche + ^ pour obtenir ¨, puis ${v} (${FN[k.f]})`}}
+  const k=KEYMAP[c];
+  if(!k)return {ids:[],t:''};
+  if(k.m==='shift')return {ids:[shiftFor(k.f),k.id],t:`Maj ${sideTxt(k.f)} + touche ${k.b.toUpperCase()} — ${FN[k.f]}`};
+  if(k.m==='altgr')return {ids:['altgr',k.id],t:`AltGr + touche ${k.b.toUpperCase()} — ${FN[k.f]}`};
+  return {ids:[k.id],t:FN[k.f]};
+}
+function kbHTML(opts){
+  opts=opts||{};const heat=opts.heat,mx=heat?Math.max(1,...Object.values(heat)):1;
+  const st=chars=>{if(!heat)return '';let n=0;chars.forEach(c=>{if(c)n+=heat[c]||0});return ` style="background:rgba(220,38,38,${(0.08+n/mx*0.85).toFixed(2)})" title="${n} erreur(s)"`};
+  const key=k=>`<div class="key f${k[2]}${k[0]==='f'||k[0]==='j'?' rep':''}" data-id="k${esc(k[0])}"${st([k[0],k[1],k[3]])}>${k[1]?`<small>${esc(k[1])}</small>`:''}${esc(/^[a-z]$/.test(k[0])?k[0].toUpperCase():k[0])}</div>`;
+  const sp=(id,lab,f,cls)=>`<div class="key f${f} ${cls||'w2'}" data-id="${id}">${lab}</div>`;
+  let h='<div class="kb">';
+  h+=`<div class="row">${KB[0].map(key).join('')}</div>`;
+  h+=`<div class="row">${sp('tab','Tab',0)}${KB[1].map(key).join('')}</div>`;
+  h+=`<div class="row">${sp('caps','Verr Maj',0)}${KB[2].map(key).join('')}</div>`;
+  h+=`<div class="row">${sp('shiftL','Maj',0)}${KB[3].map(key).join('')}${sp('shiftR','Maj',7)}</div>`;
+  h+=`<div class="row" style="justify-content:center">${sp('space','Espace',8,'sp')}${sp('altgr','AltGr',4)}</div></div>`;
+  let np='';
+  if(opts.numpad)np=`<div class="kb" style="min-width:auto">${NP.map(r=>`<div class="row">${r.map(c=>`<div class="key f${NPF[c]}${c==='5'?' rep':''}" data-id="n${esc(c)}"${heat?st([c]):''}>${esc(c)}</div>`).join('')}</div>`).join('')}</div>`;
+  const leg=heat?'':`<div class="legend"><span><i class="f0"></i>auriculaires</span><span><i class="f1"></i>annulaires</span><span><i class="f2"></i>majeurs</span><span><i class="f3"></i>index</span><span><i class="f8"></i>pouces</span><span>— les touches F, J et 5 ont un repère</span></div>`;
+  return `<div class="kbs">${h}${np}</div>${leg}`;
+}
+
+// ============ OUTILS ============
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const strip=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const fr=(x,d=1)=>Number(x).toFixed(d).replace('.',',');
+const fmtDate=t=>{const d=new Date(t),p=n=>String(n).padStart(2,'0');return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`};
+const hashPin=p=>{let h=2166136261;for(const c of 'rhb:'+p){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0}return h.toString(16)};
+const ls={get:(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
+
+// ============ RÉGLAGES ET PROFILS ============
+let SET=Object.assign({fs:28,theme:'',dots:true,kb:true,noNumpad:false},ls.get('rhb_reglages_v1',{}));
+const saveSet=()=>ls.set('rhb_reglages_v1',SET);
+function applySet(){document.documentElement.style.setProperty('--fs',SET.fs+'px');if(SET.theme)document.documentElement.dataset.theme=SET.theme;else delete document.documentElement.dataset.theme}
+applySet();
+let PROFILES=ls.get('rhb_profils_v1',null);
+if(!PROFILES){PROFILES=[];if(localStorage.getItem('rhb_tuteur_v1:local')||localStorage.getItem('rhb_tuteur_v1')){PROFILES.push({id:'local',nom:'Profil de ce poste',pin:null});if(!localStorage.getItem('rhb_tuteur_v1:local'))localStorage.setItem('rhb_tuteur_v1:local',localStorage.getItem('rhb_tuteur_v1'))}ls.set('rhb_profils_v1',PROFILES)}
+let ME=null,P={};
+const save=()=>{if(ME&&!ls.set('rhb_tuteur_v1:'+ME.id,P))alert('Espace de stockage plein : exportez vos résultats dans « Mes progrès ».')};
+
+function renderLogin(){
+  show('login');$('pform').innerHTML='';$('who-h').textContent='';
+  $('plist').innerHTML=PROFILES.length?'<h3>Profils sur cet ordinateur</h3>'+PROFILES.map(p=>`<button class="sec" onclick="pickProfile('${p.id}')">${esc(p.nom)}</button>`).join(''):'<p class="note">Aucun profil pour l’instant.</p>';
+}
+function pickProfile(id){
+  const p=PROFILES.find(x=>x.id===id);if(!p)return;
+  if(!p.pin)return enter(p);
+  $('pform').innerHTML=`<h3>${esc(p.nom)}</h3><label>Votre code à 4 chiffres <input id="pin" type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label> <button onclick="checkPin('${p.id}')">Entrer</button><p id="pmsg" role="status"></p>`;
+  $('pin').focus();$('pin').onkeydown=e=>{if(e.key==='Enter')checkPin(id)};
+}
+function checkPin(id){const p=PROFILES.find(x=>x.id===id);if(hashPin($('pin').value)===p.pin)enter(p);else $('pmsg').textContent='Code incorrect.'}
+function newProfileForm(){
+  $('pform').innerHTML=`<h3>Nouveau profil</h3><p><label>Prénom et nom <input id="pn" maxlength="40"></label></p><p><label>Code à 4 chiffres <input id="pc" type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label> <label>Confirmez <input id="pc2" type="password" inputmode="numeric" maxlength="4" autocomplete="off"></label></p><button onclick="createProfile()">Créer</button><p id="pmsg" role="status"></p>`;$('pn').focus();
+}
+function createProfile(){
+  const n=$('pn').value.trim(),c=$('pc').value,c2=$('pc2').value;
+  if(!n)return $('pmsg').textContent='Indiquez votre prénom.';
+  if(!/^\d{4}$/.test(c))return $('pmsg').textContent='Le code doit contenir exactement 4 chiffres.';
+  if(c!==c2)return $('pmsg').textContent='Les deux codes ne sont pas identiques.';
+  const p={id:'p'+Date.now().toString(36),nom:n,pin:hashPin(c)};PROFILES.push(p);ls.set('rhb_profils_v1',PROFILES);enter(p);
+}
+function enter(p){
+  ME=p;P=ls.get('rhb_tuteur_v1:'+p.id,{});P.__h=P.__h||[];P.__k=P.__k||{};P.__att=P.__att||[];
+  $('who-h').innerHTML=`Profil : <b>${esc(p.nom)}</b> · <button type="button" onclick="logout()">Changer de profil</button>`;
+  SESSION=Date.now();home();
+}
+function logout(){ME=null;P={};cur=null;S=null;renderLogin()}
+
+// ============ PROGRESSION ============
+const rec=(L,i)=>{const x=(P[L.id]||[])[i];return typeof x==='number'?{p:x,s:0,v:x>=90&&!L.minWpm}:(x||null)};
+const lessonNet=L=>{let w=0,t=0;L.texts.forEach((_,i)=>{const r=rec(L,i);if(r&&r.m){w+=r.nw;t+=r.m}});return t?w/t:0};
+const passed=L=>L.texts.every((_,i)=>{const r=rec(L,i);return !!(r&&r.v)})&&(!L.minWpm||lessonNet(L)>=L.minWpm);
+const status=i=>passed(LESSONS[i])?'done':(i===0||passed(LESSONS[i-1]))?'current':'locked';
+const nextEx=i=>{const k=LESSONS[i].texts.findIndex((_,j)=>!((rec(LESSONS[i],j)||{}).v));return k<0?0:k};
+const stars=(L,r)=>!r||!r.v?'':(r.p>=98&&(!L.target||r.s>=L.target))?'★★★':r.p>=95?'★★':'★';
+let cur=null,S=null,SESSION=Date.now(),LASTBREAK=Date.now(),PREV='home';
+
+function show(id){['login','home','ex','res','sc','prog','fb'].forEach(s=>{const el=$(s);if(el)el.classList.toggle('hidden',s!==id)});window.scrollTo(0,0)}
+
+function home(){
+  if(!ME)return renderLogin();
+  cur=null;if(S)S.on=false;show('home');
+  const done=LESSONS.filter(passed).length;
+  $('hello').textContent=`Bonjour ${ME.nom.split(' ')[0]} · ${done}/${LESSONS.length} leçons validées`;
+  $('list').innerHTML=LESSONS.map((L,i)=>{
+    const s=status(i);
+    const info=(P[L.id]||[]).length?'Meilleurs : '+L.texts.map((_,j)=>stars(L,rec(L,j))||'–').join(' · '):'Pas encore commencée';
+    const label={done:'✔ Validée',current:'À faire',locked:'🔒 Verrouillée'}[s];
+    const lv=L.id.split('.')[0];
+    const head=(i===0||LESSONS[i-1].id.split('.')[0]!==lv)?`<h3>Niveau ${lv} · ${LV[lv]}</h3>`:'';
+    return `${head}<button class="lesson ${s==='current'?'current':''}" ${s==='locked'?'disabled':''} onclick="launch(${i},${nextEx(i)})">
+      <span><b>Leçon ${L.id} · ${esc(L.name)}</b><br><small>${info}</small></span><span>${label}</span></button>`;
+  }).join('');
+}
+
+// ============ EXERCICES DE FRAPPE ============
+function launch(li,ei){LESSONS[li].ch?startSc(li):startEx(li,ei)}
+function startEx(li,ei,custom){
+  const L=custom||LESSONS[li];
+  cur={li,ei,L,text:L.texts[ei],pos:0,hits:0,total:0,ks:0,dead:0,werr:0,nErr:0,rem:0,keyErr:{},types:Object.fromEntries(TYPES.map(t=>[t,0])),typed:'',marks:[],ever:new Set(),times:[],t0:0,last:0,pauseMs:0,blurAt:0,blurs:0,hes:0,fast:0,consec:0,flashAt:-1e9,done:false,paused:false,deadline:0,prev:{nErr:0,werr:0,types:{}},kbForced:false};
+  show('ex');
+  $('title').textContent=`${custom?L.name:`Leçon ${L.id} · ${L.name}`} — exercice ${ei+1}/${L.texts.length}${L.mode==='continu'?' · mode continu':L.mode==='corrige'?' · correction autorisée':L.exam?' · examen':''}`;
+  $('intro').textContent=L.intro||'';
+  $('msg').textContent=L.exam?'Le chronomètre démarre à la première touche.':'Tapez la première touche indiquée.';
+  $('nptog').classList.toggle('hidden',!L.keypad);
+  $('nptog').textContent=SET.noNumpad?'J’ai un pavé numérique':'Mon ordinateur n’a pas de pavé numérique';
+  $('dottog').textContent=SET.dots?'Masquer les points d’espace':'Afficher les points d’espace';
+  drawKb();render();
+}
+function drawKb(){
+  const L=cur.L,hide=L.exam||(!SET.kb&&!cur.kbForced);
+  $('kbcard').classList.toggle('hidden',hide);
+  $('kbtog').classList.toggle('hidden',!!L.exam);
+  $('kbtog').textContent=SET.kb?'Masquer le clavier':'Afficher le clavier';
+  if(!hide)$('kbwrap').innerHTML=kbHTML({numpad:L.keypad&&!SET.noNumpad});
+}
+function toggleKb(){SET.kb=!SET.kb;cur.kbForced=false;saveSet();drawKb();render()}
+function toggleDots(){SET.dots=!SET.dots;saveSet();$('dottog').textContent=SET.dots?'Masquer les points d’espace':'Afficher les points d’espace';render()}
+function toggleNumpad(){SET.noNumpad=!SET.noNumpad;saveSet();$('nptog').textContent=SET.noNumpad?'J’ai un pavé numérique':'Mon ordinateur n’a pas de pavé numérique';drawKb();render()}
+function fontStep(d){SET.fs=Math.max(20,Math.min(48,SET.fs+d));saveSet();applySet();render()}
+function quitEx(){const c=cur;cur=null;if(c&&c.L.free)home();else home()}
+
+const mins=end=>Math.max(end-cur.t0-cur.pauseMs,5000)/60000;
+// Vitesses (cahier § 6.5) : 1 mot = 5 caractères
+function speeds(end){
+  const mi=mins(end),m=cur.L.mode||'blocage';
+  if(m==='blocage'){const brut=(cur.total+cur.dead)/5/mi;return {brut,net:cur.hits/5/mi,mi}}
+  const ks=(m==='continu'?cur.typed.length:cur.ks)+cur.dead,brut=ks/5/mi;
+  return {brut,net:Math.max(0,brut-cur.rem/mi),mi};
+}
+const prec=()=>{const d=cur.hits+cur.nErr;return d?cur.hits/d*100:0};
+function regularity(t){if(t.length<2)return 100;const m=t.reduce((a,b)=>a+b,0)/t.length;const sd=Math.sqrt(t.reduce((a,b)=>a+(b-m)**2,0)/t.length);return Math.max(0,100-(sd/m)*100)}
+
+// Type d'erreur pour une substitution
+function etype(a,b){
+  if(a===' '||b===' ')return 'espace';
+  if(a.toLowerCase()===b.toLowerCase())return 'casse';
+  if(strip(a)===strip(b)||strip(a).toLowerCase()===strip(b).toLowerCase())return 'accent';
+  if(/\d/.test(a)||/\d/.test(b))return 'chiffre';
+  return 'substitution';
+}
+// Coût d'alignement (le poids pédagogique est appliqué ensuite)
+const dc=(a,b)=>a===b?0:(a.toLowerCase()===b.toLowerCase()||strip(a)===strip(b))?.5:1;
+
+// Alignement par distance d'édition avec transposition, limité à une bande de ±B caractères (rapide même sur un long texte)
+function align(a,b){
+  const n=Math.min(a.length,b.length+40),m=b.length,B=40,INF=1e9;
+  const D=[];for(let i=0;i<=n;i++)D.push(new Float64Array(2*B+1).fill(INF));
+  const g=(i,j)=>(i<0||j<0||j-i<-B||j-i>B)?INF:D[i][j-i+B];
+  const s=(i,j,v)=>{D[i][j-i+B]=v};
+  for(let i=0;i<=Math.min(n,B);i++)s(i,0,i);
+  for(let j=0;j<=Math.min(m,B);j++)s(0,j,j);
+  const tr=(i,j)=>i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1]&&a[i-1]!==a[i-2];
+  for(let i=1;i<=n;i++)for(let j=Math.max(1,i-B);j<=Math.min(m,i+B);j++){
+    let v=Math.min(g(i-1,j)+1,g(i,j-1)+1,g(i-1,j-1)+dc(a[i-1],b[j-1]));
+    if(tr(i,j))v=Math.min(v,g(i-2,j-2)+1);
+    s(i,j,v);
+  }
+  let bi=Math.max(0,m-B);for(let k=bi;k<=Math.min(n,m+B);k++)if(g(k,m)<=g(bi,m))bi=k;
+  const ops=[];let i=bi,j=m;
+  while(i>0||j>0){
+    const v=g(i,j);
+    if(tr(i,j)&&v===g(i-2,j-2)+1){ops.unshift({t:'trans',i:i-2,j:j-2});i-=2;j-=2}
+    else if(i>0&&j>0&&v===g(i-1,j-1)+dc(a[i-1],b[j-1])){ops.unshift({t:a[i-1]===b[j-1]?'match':'sub',i:i-1,j:j-1});i--;j--}
+    else if(j>0&&v===g(i,j-1)+1){ops.unshift({t:'ins',j:j-1});j--}
+    else{ops.unshift({t:'del',i:i-1});i--}
+  }
+  let cursor=0;for(const o of ops){if(o.t==='match'||o.t==='sub')cursor=o.i+1;else if(o.t==='trans')cursor=o.i+2}
+  const marks=[],typedOk=Array(m).fill(false),typedKey=Array(m).fill(null),keyErr={},types=Object.fromEntries(TYPES.map(t=>[t,0]));
+  let hits=0,werr=0,nErr=0;
+  const bad=(c,t)=>{werr+=W[t];nErr++;types[t]++;keyErr[c]=(keyErr[c]||0)+1};
+  for(const o of ops){
+    if(o.t==='match'){hits++;typedOk[o.j]=true}
+    else if(o.t==='sub'){bad(a[o.i],etype(a[o.i],b[o.j]));marks[o.i]='err';typedKey[o.j]=a[o.i]}
+    else if(o.t==='del'){if(o.i>=cursor)continue;bad(a[o.i],a[o.i]===' '?'espace':'omission');marks[o.i]='err'}
+    else if(o.t==='ins'){bad(b[o.j],b[o.j]===' '?'espace':'insertion');typedKey[o.j]=b[o.j]}
+    else if(o.t==='trans'){bad(a[o.i],'transposition');marks[o.i]=marks[o.i+1]='err';typedKey[o.j]=a[o.i];typedKey[o.j+1]=a[o.i+1]}
+  }
+  return {cursor,marks,typedOk,typedKey,hits,werr,nErr,keyErr,types};
+}
+
+function onWrong(k,key,now){
+  cur.flashAt=now;markBad(k);secoue();setTimeout(()=>cur&&render(),320);cur.consec++;
+  if(key&&cur.keyErr[key]===3){const g=guide(key,cur.L.keypad);$('msg').textContent=`Touche ${key===' '?'Espace':key} : ${g.t||'regardez le clavier en bas'}.`}
+  if(!SET.kb&&!cur.L.exam&&cur.consec>=3&&!cur.kbForced){cur.kbForced=true;drawKb();$('msg').textContent='Le clavier réapparaît pour vous aider.'}
+}
+// Mode continu : la frappe complète est réalignée à chaque touche, les erreurs restent
+function contKey(k,now){
+  cur.typed+=k;
+  const r=align(cur.text,cur.typed);
+  Object.assign(cur,{hits:r.hits,werr:r.werr,nErr:r.nErr,rem:r.nErr,keyErr:r.keyErr,types:r.types,marks:r.marks,pos:r.cursor});
+  r.marks.forEach((m,i)=>{if(m)cur.ever.add(i)});
+  const last=cur.typed.length-1;
+  if(r.typedOk[last]){cur.consec=0;$('msg').textContent=''}else onWrong(k,r.typedKey[last]||cur.text[cur.pos],now);
+  if(cur.pos>=cur.text.length)return finish();
+}
+// Correction autorisée / examen : chaque nouvelle erreur est comptée, même si elle est corrigée ensuite
+function corrKey(k,now){
+  cur.typed+=k;cur.ks++;
+  const r=align(cur.text,cur.typed),pv=cur.prev,last=cur.typed.length-1;
+  const dn=r.nErr-pv.nErr;
+  if(dn>0)cur.nErr+=dn;
+  if(r.werr>pv.werr)cur.werr+=r.werr-pv.werr;
+  TYPES.forEach(t=>{const d=r.types[t]-(pv.types[t]||0);if(d>0)cur.types[t]+=d});
+  Object.entries(r.keyErr).forEach(([c,n])=>{const d=n-((pv.keyErr||{})[c]||0);if(d>0)cur.keyErr[c]=(cur.keyErr[c]||0)+d});
+  cur.prev={nErr:r.nErr,werr:r.werr,types:r.types,keyErr:r.keyErr};
+  cur.hits=r.hits;cur.rem=r.nErr;cur.marks=r.marks;cur.pos=r.cursor;
+  r.marks.forEach((m,i)=>{if(m)cur.ever.add(i)});
+  if(r.typedOk[last]){cur.consec=0;$('msg').textContent=''}else onWrong(k,r.typedKey[last]||cur.text[cur.pos],now);
+  if(cur.pos>=cur.text.length)return finish();
+}
+// Retour arrière : n'efface pas les erreurs déjà comptées et ne compte pas comme une frappe ratée
+function corrBack(){
+  if(!cur.typed)return;
+  cur.typed=cur.typed.slice(0,-1);
+  const r=align(cur.text,cur.typed);
+  cur.prev={nErr:r.nErr,werr:r.werr,types:r.types,keyErr:r.keyErr};
+  cur.hits=r.hits;cur.rem=r.nErr;cur.marks=r.marks;cur.pos=r.cursor;
+}
+function blocKey(k,now){
+  const exp=cur.text[cur.pos];cur.total++;
+  if(k===exp){cur.hits++;cur.marks[cur.pos]=cur.ever.has(cur.pos)?'fix':'ok';cur.pos++;cur.consec=0;$('msg').textContent=''}
+  else{
+    const t=etype(exp,k);cur.werr+=W[t];cur.nErr++;cur.types[t]++;cur.keyErr[exp]=(cur.keyErr[exp]||0)+1;cur.ever.add(cur.pos);
+    onWrong(k,exp,now);
+  }
+  if(cur.pos>=cur.text.length)return finish();
+}
+function markBad(k){const g=guide(k,cur.L.keypad);const id=g.ids[g.ids.length-1];if(!id)return;document.querySelectorAll('#kbwrap .key').forEach(el=>{if(el.dataset.id===id){el.classList.add('bad');setTimeout(()=>el.classList.remove('bad'),300)}})}
+
+function render(){
+  if(!cur)return;
+  const t=cur.text,flash=performance.now()-cur.flashAt<300;
+  const frappe=cur._lp!==undefined&&cur.pos>cur._lp;cur._lp=cur.pos;
+  $('txt').innerHTML=[...t].map((c,i)=>{
+    let cls;
+    if(i<cur.pos)cls=cur.marks[i]==='err'?'bad':(cur.ever.has(i)?'fix':'ok');
+    else if(i===cur.pos)cls='cur'+(flash?' err':'');
+    else cls='todo';
+    if(frappe&&i===cur.pos-1&&cur.marks[i]==='ok')cls+=' pop';
+    return `<span class="${cls}">${c===' '?(SET.dots?'·':' '):esc(c)}</span>`;
+  }).join('');
+  const c=$('txt').querySelector('.cur');
+  if(c){const lh=parseFloat(getComputedStyle($('txt')).lineHeight)||SET.fs*1.7;$('txt').scrollTop=Math.max(0,c.offsetTop-lh)}
+  moveCaret();
+  const exp=t[cur.pos]||'',g=guide(exp,cur.L.keypad);
+  majMain(exp);
+  document.querySelectorAll('#kbwrap .key').forEach(el=>el.classList.toggle('next',g.ids.includes(el.dataset.id)));
+  const now=performance.now(),m=cur.t0?speeds(now).net:0;
+  let st=`Vitesse nette : ${fr(m)} mots/min · Précision : ${cur.t0?fr(prec(),0):'–'} % · Erreurs : ${cur.nErr}`;
+  if(cur.L.exam&&cur.deadline){const r=Math.max(0,cur.deadline-now)/1000;st+=` · Temps restant : ${Math.floor(r/60)}:${String(Math.floor(r%60)).padStart(2,'0')}`}
+  $('stats').textContent=st;
+  $('hint').textContent=exp&&!cur.L.exam?`Prochaine touche : ${exp===' '?'Espace':exp}${g.t?' — '+g.t:''}`:'';
+}
+
+document.addEventListener('keydown',e=>{
+  if(S&&S.on&&!$('sc').classList.contains('hidden'))return scKey(e);
+  if(!cur||cur.done||$('ex').classList.contains('hidden'))return;
+  if(e.metaKey)return;
+  const ag=e.getModifierState&&e.getModifierState('AltGraph');
+  if((e.ctrlKey||e.altKey)&&!ag)return;
+  const mode=cur.L.mode||'blocage';
+  if(e.key==='Dead'){cur.dead++;return}
+  if(e.key==='Backspace'){if(mode==='corrige'){e.preventDefault();corrBack();render()}return}
+  if(e.key==='Tab'||e.key==='Enter'){if(document.activeElement&&document.activeElement.tagName==='BUTTON'&&e.key==='Enter')return;e.preventDefault();return}
+  if(e.key.length!==1){if(cur.L.keypad&&e.code&&e.code.startsWith('Numpad')&&!SET.noNumpad)$('msg').textContent='Activez la touche Verr Num pour utiliser le pavé numérique.';return}
+  e.preventDefault();
+  let k=e.key;const now=performance.now();
+  pressKey(e.key);
+  if(cur.L.keypad&&!SET.noNumpad&&/^[0-9+\-*/.]$/.test(k)&&e.code&&!e.code.startsWith('Numpad')){k='\u0001';$('msg').textContent='Utilisez le pavé numérique, à droite du clavier.'}
+  if(!cur.t0){cur.t0=now;if(cur.L.exam)cur.deadline=now+300000}
+  else{
+    const gap=now-cur.last;
+    if(cur.blurAt&&!cur.L.exam){cur.pauseMs+=now-cur.blurAt}
+    else if(gap>30000&&!cur.L.exam){cur.pauseMs+=gap}
+    else{cur.times.push(gap);if(gap>2000)cur.hes++;if(gap<15)cur.fast++}
+  }
+  cur.blurAt=0;cur.last=now;
+  if(cur.paused){cur.paused=false;$('msg').textContent=''}
+  if(mode==='continu')contKey(k,now);
+  else if(mode==='corrige'||mode==='examen')corrKey(k,now);
+  else blocKey(k,now);
+  if(cur&&!cur.done)render();
+});
+addEventListener('blur',()=>{if(cur&&!cur.done&&cur.t0){if(cur.L.exam){cur.blurs++}else{cur.blurAt=performance.now();cur.paused=true;$('msg').textContent='Exercice en pause. Appuyez sur une touche pour reprendre.'}}});
+setInterval(()=>{
+  if(!cur||cur.done)return;
+  if(cur.L.exam&&cur.deadline){if(performance.now()>=cur.deadline){cur.last=cur.deadline;return finish()}render()}
+  else if(cur.last&&!cur.paused&&performance.now()-cur.last>30000){cur.paused=true;$('msg').textContent='Prenez votre temps. Appuyez sur une touche pour reprendre.'}
+},1000);
+
+function tips(t,L){
+  const a=[];
+  if(t.chiffre)a.push(L.keypad?'Gardez la main droite sur le pavé numérique, index sur 4, majeur sur 5, annulaire sur 6.':'Pour les chiffres du haut, maintenez Maj avec l’autre main.');
+  if(t.accent)a.push('Accents : é, è, à, ç et ù ont leur propre touche ; ê, â, î, ô se tapent avec ^ puis la voyelle.');
+  if(t.casse)a.push('Majuscules : appuyez sur Maj avec la main opposée à la lettre.');
+  if(t.espace)a.push('Espaces : frappez la barre d’espace avec le pouce, une seule fois entre deux mots.');
+  if(t.transposition)a.push('Vous inversez des lettres : ralentissez un peu, la précision vient avant la vitesse.');
+  if(t.omission)a.push('Vous oubliez des lettres : lisez un mot à l’avance.');
+  return a;
+}
+function finish(){
+  cur.done=true;
+  const c=cur,L=c.L,n=c.text.length,li=c.li,ei=c.ei;
+  const end=c.last||performance.now();
+  const {brut,net,mi}=speeds(end);
+  const p=prec(),pw=Math.max(0,100*(1-c.werr/n)),reg=regularity(c.times);
+  const wp=L.target?0.6:0.9,ws=L.target?0.3:0;
+  const note=Math.min(20,Math.max(0,20*(wp*pw/100+ws*Math.min(1,net/(L.target||1))+0.1*reg/100)));
+  const ok=L.diag?true:p>=(L.minPrec||90);
+  const corrected=Math.max(0,c.nErr-c.rem);
+  const suspect=c.times.length>10&&c.fast/c.times.length>0.2;
+  const entry={d:Date.now(),l:L.free?L.id:L.id,ex:ei+1,nm:L.name,mode:L.mode||'blocage',type:L.exam?'certification':L.diag?'test':L.free?'révision':'entraînement',dur:Math.round(mi*60),car:n,fr:(L.mode==='continu'?c.typed.length:L.mode&&L.mode!=='blocage'?c.ks:c.total)+c.dead,brut,net,p,err:c.nErr,t:c.types,corr:corrected,reg,hes:c.hes,note,v:ok,blur:c.blurs,suspect};
+  if(!L.free){
+    const old=rec(L,ei);
+    const better=!old||(ok&&!old.v)||(ok===!!old.v&&note>(old.note||0));
+    if(better){P[L.id]=P[L.id]||[];P[L.id][ei]={p,s:net,v:ok,m:mi,nw:net*mi,note}}
+  }
+  entry.et=stars(L,{p,s:net,v:ok}).length;
+  Object.entries(c.keyErr).forEach(([k,v])=>{if(k!=='\u0001')P.__k[k]=(P.__k[k]||0)+v});
+  let att='';
+  if(L.exam&&ok&&net>=L.minWpm){
+    const code='RSA-'+new Date().getFullYear()+'-'+Math.random().toString(36).slice(2,8).toUpperCase();
+    P.__att.push({code,d:Date.now(),nom:ME.nom,net,p});entry.att=code;att=attestHTML(code,net,p);
+  }
+  P.__h.push(entry);if(P.__h.length>1500)P.__h.splice(0,P.__h.length-1500);
+  P.__last=Date.now();save();
+  const top=Object.entries(c.keyErr).filter(([k])=>k!=='\u0001').sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k])=>k===' '?'Espace':k).join(', ')||'aucune';
+  const lessonOk=!L.free&&passed(L),last=ei===L.texts.length-1;
+  if(!L.free&&!L.diag&&ok)lessonOk?confettis(140,3200):confettis(40,1800);
+  let nav='';
+  if(L.free)nav=`<button onclick="${L.id==='R'?'revision()':'freePractice()'}">Nouvel exercice</button>`;
+  else if(!ok)nav=`<button onclick="startEx(${li},${ei})">Recommencer</button>`;
+  else if(!last)nav=`<button onclick="startEx(${li},${ei+1})">Exercice suivant</button>`;
+  else if(lessonOk&&li<LESSONS.length-1)nav=`<button onclick="launch(${li+1},0)">Leçon suivante</button>`;
+  else if(!lessonOk)nav=`<button onclick="startEx(${li},0)">Recommencer la leçon</button>`;
+  const goal=`${L.minPrec||90} %`;
+  let head=ok?`Bravo ! ${fr(p,0)} % de précision${L.minWpm?` et ${fr(net)} mots/min`:''}.`:`Bon travail, encore un essai pour atteindre ${goal}.`;
+  let diag='';
+  if(L.diag){const r=net<10?'Commencez par le niveau 1 : vous allez vite progresser.':net<20||p<92?'Bonne base : suivez le parcours, les premiers niveaux iront vite.':'Très bon niveau : les niveaux 1 à 3 seront une révision rapide. Concentrez-vous sur les niveaux 4 à 7.';head='Test de positionnement terminé';diag=`<p><b>Votre point de départ :</b> ${fr(net)} mots/min, ${fr(p,0)} % de précision.</p><p>${r}</p>`}
+  const ty=TYPES.filter(t=>c.types[t]).map(t=>`${TLAB[t]} : ${c.types[t]}`).join(' · ');
+  const tp=tips(c.types,L);
+  const brk=Date.now()-LASTBREAK>20*60000?(LASTBREAK=Date.now(),'<p class="card" style="background:var(--bg)"><b>Pensez à faire une pause</b> : détendez vos mains et reposez vos yeux quelques minutes.</p>'):'';
+  show('res');
+  if(!L.free)setTimeout(()=>jauge(note),0);
+  $('resbody').innerHTML=`
+    <h2>${head}</h2>${diag}
+    <div class="stars">${L.diag?'':(stars(L,{p,s:net,v:ok})||'Pas encore d’étoile')}</div>
+    <div class="grid2">
+      <div class="stat">Vitesse nette<b>${fr(net)} mots/min</b><small>brute : ${fr(brut)}</small></div>
+      <div class="stat">Précision<b>${fr(p,1)} %</b></div>
+      <div class="stat">Note<b>${fr(note)}/20</b></div>
+      <div class="stat">Régularité<b>${fr(reg,0)} %</b></div>
+    </div>
+    <p>Erreurs : <b>${c.nErr}</b>${ty?` (${ty})`:''}${(L.mode==='corrige')?` · corrigées : <b>${corrected}</b>`:''} · Hésitations : <b>${c.hes}</b></p>
+    <p>Touches à revoir : <b>${esc(top)}</b></p>
+    ${tp.length?`<ul>${tp.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+    ${lessonOk?'<p><b>Leçon validée !</b></p>':(L.minWpm&&!L.free&&L.texts.every((_,j)=>(rec(L,j)||{}).v)?`<p>Vitesse moyenne de la leçon : <b>${fr(lessonNet(L))} mots/min</b> (objectif ${L.minWpm}). Refaites un exercice pour l’améliorer.</p>`:'')}
+    ${L.exam&&ok&&net<L.minWpm?`<p>Précision atteinte, mais la vitesse doit atteindre ${L.minWpm} mots/min pour obtenir l’attestation.</p>`:''}
+    ${suspect?'<p class="note">Frappes anormalement rapides détectées : ce résultat est signalé dans l’export.</p>':''}
+    ${brk}
+    ${att}
+    ${nav}
+    <button class="sec" onclick="home()">Accueil</button>`;
+}
+function attestHTML(code,net,p){
+  return `<div class="att"><h3>Attestation de niveau — Rehoboth Skills Academy</h3>
+  <p>Nous attestons que <b>${esc(ME.nom)}</b> a réussi le test final du tuteur de frappe AZERTY.</p>
+  <p>Vitesse certifiée : <b>${fr(net)} mots/min</b> · Précision : <b>${fr(p)} %</b></p>
+  <p>Date : ${new Date().toLocaleDateString('fr-FR')} · Code de vérification : <b>${code}</b></p>
+  <p class="note">Ce code figure dans l’export des résultats de l’apprenant. Yopougon CHU, Abidjan · ${MAIL}</p></div>
+  <button onclick="printAtt()">Imprimer l’attestation</button>`;
+}
+function printAtt(){document.body.classList.add('p-att');window.print();setTimeout(()=>document.body.classList.remove('p-att'),500)}
+
+// Entraînement libre et révision ciblée
+function learnedTexts(){const out=[];LESSONS.forEach(L=>{if(!L.ch&&!L.diag&&passed(L))out.push(...L.texts)});return out}
+function freePractice(){
+  let pool=learnedTexts();if(!pool.length)pool=LESSONS[2].texts;
+  const pick=[];for(let i=0;i<3;i++)pick.push(pool[Math.floor(Math.random()*pool.length)]);
+  startEx(-1,0,{id:'L',name:'Entraînement libre',free:true,mode:'continu',texts:[pick.join(' ')]});
+}
+function revision(){
+  const top=Object.entries(P.__k||{}).filter(([k])=>k.length===1&&k!==' ').sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k])=>k);
+  if(!top.length){alert('Pas encore assez de données : faites quelques exercices d’abord.');return}
+  const base=['f','j','d','k'],parts=[];
+  top.forEach(k=>{parts.push(k+k+k);base.forEach(b=>parts.push(b+k+b));parts.push(k+' '+k)});
+  for(let i=parts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[parts[i],parts[j]]=[parts[j],parts[i]]}
+  startEx(-1,0,{id:'R',name:'Révision de mes touches faibles : '+top.join(', '),free:true,mode:'continu',texts:[parts.join(' ')]});
+}
+
+// ============ NIVEAU 6 : RACCOURCIS DANS UN ÉDITEUR SIMULÉ ============
+const MSG={'ctrl+s':'Document enregistré (simulé).','ctrl+p':'Boîte d’impression (simulée).','ctrl+o':'Ouvrir un document (simulé).','ctrl+f':'Rechercher (simulé).','ctrl+g':'Atteindre une page (simulé).','f1':'Aide ouverte (simulée).','f2':'Mode modification de la cellule (simulé).','f4':'Dernière action répétée (simulée).','f5':'Actualisation simulée : la page ne se recharge pas.','f7':'Vérification orthographique (simulée).','f12':'Enregistrer sous (simulé).','tab':'Tab : champ suivant (simulé).','escape':'Sélection annulée.'};
+const scMsg=t=>{$('sc-msg').textContent=t};
+function startSc(li){
+  const L=LESSONS[li];
+  S={li,L,list:L.ch,idx:0,res:[],doc:'Bonjour, voici un texte pour l’éditeur.\nSecond paragraphe à modifier.',c:0,sel:null,clip:'',hist:[],redo:[],fmt:{i:false,u:false},chal:null,tries:0,t0:0,on:true};
+  show('sc');
+  $('sc-title').textContent=`Leçon ${L.id} · ${L.name}${L.note?' — '+L.note:''}`;
+  nextChal();
+}
+function nextChal(){
+  if(S.idx>=S.list.length)return scFinish();
+  const ch=S.list[S.idx];
+  S.chal=ch;S.tries=0;S.t0=performance.now();
+  if(ch.pre){S.sel=ch.pre[0];S.c=ch.pre[1]}
+  $('sc-prompt').textContent=ch.p;
+  $('sc-step').textContent=`Défi ${S.idx+1} sur ${S.list.length}`;
+  $('sc-quiz').innerHTML=ch.q?ch.o.map(o=>`<button onclick="judge('${o}')">${o.replace(/\+/g,' + ').toUpperCase()}</button>`).join(''):'';
+  scMsg(ch.q?'Choisissez la bonne combinaison (souris, ou Tab puis Entrée).':'Appuyez sur la combinaison demandée.');
+  scRender();
+  if(ch.q){const b=$('sc-quiz').querySelector('button');if(b)b.focus()}
+}
+function judge(c){
+  if(!S||!S.chal)return;
+  const t=(performance.now()-S.t0)/1000;
+  if(c===S.chal.k){S.res.push({ok:S.tries===0,t});S.idx++;S.chal=null;scMsg('Bravo !');setTimeout(()=>S&&S.on&&nextChal(),600)}
+  else{S.tries++;scMsg('Ce n’est pas le bon raccourci. Essayez encore.')}
+}
+function combo(e){const m=[];if(e.ctrlKey)m.push('ctrl');if(e.shiftKey)m.push('shift');if(e.altKey)m.push('alt');if(e.metaKey)m.push('win');return [...m,e.key.toLowerCase()].join('+')}
+function selRange(){return S.sel===null?null:[Math.min(S.sel,S.c),Math.max(S.sel,S.c)]}
+function rep(lo,hi,t){S.hist.push([S.doc,S.c,S.sel]);S.redo=[];S.doc=S.doc.slice(0,lo)+t+S.doc.slice(hi);S.c=lo+t.length;S.sel=null}
+function insertText(t){const r=selRange()||[S.c,S.c];rep(r[0],r[1],t)}
+function act(c){
+  const d=S.doc,k=c.split('+').pop(),ext=c.includes('shift'),ctl=c.includes('ctrl');
+  const lsI=i=>d.lastIndexOf('\n',i-1)+1,le=i=>{const j=d.indexOf('\n',i);return j<0?d.length:j};
+  const word=dir=>{let i=S.c;if(dir<0){while(i>0&&d[i-1]===' ')i--;while(i>0&&d[i-1]!==' ')i--}else{while(i<d.length&&d[i]===' ')i++;while(i<d.length&&d[i]!==' ')i++}return i};
+  const vert=n=>{const col=S.c-lsI(S.c);let i=S.c;for(let s=0;s<Math.abs(n);s++){if(n<0){const p=lsI(i);if(p===0)break;i=lsI(p-1)}else{const e=le(i);if(e>=d.length)break;i=e+1}}const st=lsI(i);return st+Math.min(col,le(i)-st)};
+  const mv=t=>{if(ext){if(S.sel===null)S.sel=S.c}else S.sel=null;S.c=Math.max(0,Math.min(d.length,t));if(S.sel===S.c)S.sel=null};
+  if(MSG[c])scMsg(MSG[c]);
+  const r=selRange();
+  if(k==='arrowleft')mv(ctl?word(-1):S.c-1);
+  else if(k==='arrowright')mv(ctl?word(1):S.c+1);
+  else if(k==='arrowup')mv(vert(-1));
+  else if(k==='arrowdown')mv(vert(1));
+  else if(k==='home')mv(ctl?0:lsI(S.c));
+  else if(k==='end')mv(ctl?d.length:le(S.c));
+  else if(k==='pageup')mv(vert(-5));
+  else if(k==='pagedown')mv(vert(5));
+  else if(k==='backspace'){if(r)rep(r[0],r[1],'');else if(S.c>0)rep(S.c-1,S.c,'')}
+  else if(k==='delete'){if(r)rep(r[0],r[1],'');else if(S.c<d.length)rep(S.c,S.c+1,'')}
+  else if(k==='enter')insertText('\n');
+  else if(k==='escape')S.sel=null;
+  else if(c==='ctrl+a'){S.sel=0;S.c=d.length}
+  else if(c==='ctrl+c'){if(r){S.clip=d.slice(r[0],r[1]);scMsg('Copié : « '+S.clip+' ».')}}
+  else if(c==='ctrl+x'){if(r){S.clip=d.slice(r[0],r[1]);rep(r[0],r[1],'');scMsg('Coupé : « '+S.clip+' ».')}}
+  else if(c==='ctrl+v'){if(S.clip)insertText(S.clip)}
+  else if(c==='ctrl+z'){if(S.hist.length){S.redo.push([S.doc,S.c,S.sel]);[S.doc,S.c,S.sel]=S.hist.pop()}}
+  else if(c==='ctrl+y'){if(S.redo.length){S.hist.push([S.doc,S.c,S.sel]);[S.doc,S.c,S.sel]=S.redo.pop()}}
+  else if(c==='ctrl+i')S.fmt.i=!S.fmt.i;
+  else if(c==='ctrl+u')S.fmt.u=!S.fmt.u;
+}
+function scRender(){
+  const d=S.doc,r=selRange()||[S.c,S.c];
+  let h='';
+  for(let i=0;i<=d.length;i++){
+    if(i===S.c)h+='<span class="cur"></span>';
+    if(i<d.length){const ch=d[i]==='\n'?'<br>':esc(d[i]);h+=i>=r[0]&&i<r[1]?`<span class="sel">${ch}</span>`:ch}
+  }
+  $('doc').className='editor'+(S.fmt.i?' it':'')+(S.fmt.u?' ul':'');
+  $('doc').innerHTML=h;
+}
+function scKey(e){
+  if(['Shift','Control','Alt','Meta','AltGraph'].includes(e.key))return;
+  if(S.chal&&S.chal.q)return; // quiz : le clavier sert à naviguer entre les boutons
+  e.preventDefault();
+  const ag=e.getModifierState&&e.getModifierState('AltGraph');
+  const sp=(e.ctrlKey||e.altKey||e.metaKey||e.key.length>1)&&!(ag&&e.key.length===1);
+  if(!sp){insertText(e.key);scRender();return}
+  const c=combo(e);
+  const needSel=(c==='ctrl+c'||c==='ctrl+x')&&!selRange();
+  const needClip=c==='ctrl+v'&&!S.clip;
+  act(c);
+  if(needSel)scMsg('Sélectionnez d’abord du texte (Maj + flèches), puis recommencez.');
+  else if(needClip)scMsg('Le presse-papiers est vide : copiez ou coupez d’abord du texte.');
+  else judge(c);
+  scRender();
+}
+function scFinish(){
+  S.on=false;S.chal=null;
+  const n=S.res.length,ok=S.res.filter(r=>r.ok).length,pct=n?ok/n*100:0,avg=n?S.res.reduce((a,r)=>a+r.t,0)/n:0,pass=pct>=80&&avg<3;
+  const old=rec(S.L,0);
+  if(!old||pass||!old.v)P[S.L.id]=[{p:pct,s:avg,v:pass||(old&&old.v)}];
+  P.__h.push({d:Date.now(),l:S.L.id,ex:1,nm:S.L.name,mode:'raccourcis',type:'défi raccourcis',dur:Math.round(S.res.reduce((a,r)=>a+r.t,0)),car:n,fr:n,brut:0,net:0,p:pct,err:n-ok,t:{},corr:0,reg:0,hes:0,note:20*pct/100,v:pass,et:0,react:avg});
+  P.__last=Date.now();save();
+  show('res');
+  $('resbody').innerHTML=`<h2>${pass?'Leçon validée !':'Encore un effort'}</h2><p>Réussite au premier essai : <b>${fr(pct,0)} %</b> (objectif 80 %)</p><p>Temps moyen de réaction : <b>${fr(avg,2)} s</b> (objectif moins de 3 s)</p>${pass&&S.li<LESSONS.length-1?`<button onclick="launch(${S.li+1},0)">Leçon suivante</button>`:''}<button class="${pass?'sec':''}" onclick="launch(${S.li},0)">Recommencer</button> <button class="sec" onclick="home()">Accueil</button>`;
+}
+
+// ============ MES PROGRÈS ET EXPORTS ============
+function summary(){
+  const h=P.__h.filter(x=>x.mode!=='raccourcis'&&x.type!=='test');
+  const lastN=h.slice(-10),avg=(a,f)=>a.length?a.reduce((s,x)=>s+f(x),0)/a.length:0;
+  const done=LESSONS.filter(passed).length;
+  const ci=LESSONS.findIndex((_,i)=>status(i)==='current');
+  const lvl=ci<0?'Parcours terminé':`Niveau ${LESSONS[ci].id.split('.')[0]} · ${LV[LESSONS[ci].id.split('.')[0]]}`;
+  const best=h.reduce((m,x)=>Math.max(m,x.net||0),0);
+  return {done,lvl,net:avg(lastN,x=>x.net),best,p:avg(lastN,x=>x.p),note:avg(lastN,x=>x.note),time:P.__h.reduce((s,x)=>s+(x.dur||0),0)/60,n:P.__h.length};
+}
+function showProg(){
+  show('prog');PREV='prog';
+  setTimeout(animerVitesse,0);
+  const s=summary(),h=P.__h.slice(-15).reverse();
+  const top=Object.entries(P.__k||{}).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([k,n])=>`${k===' '?'Espace':esc(k)} (${n})`).join(', ')||'aucune donnée';
+  $('progbody').innerHTML=`<h2>Mes progrès — ${esc(ME.nom)}</h2>
+  <div class="grid2">
+    <div class="stat">Leçons validées<b>${s.done}/${LESSONS.length}</b></div>
+    <div class="stat">Niveau actuel<b style="font-size:16px">${s.lvl}</b></div>
+    <div class="stat">Vitesse nette moyenne<b>${fr(s.net)} mots/min</b><small>sur les 10 derniers exercices · meilleure : ${fr(s.best)}</small></div>
+    <div class="stat">Précision moyenne<b>${fr(s.p,0)} %</b></div>
+    <div class="stat">Note moyenne<b>${fr(s.note)}/20</b></div>
+    <div class="stat">Temps d’entraînement<b>${fr(s.time,0)} min</b></div>
+  </div>
+  <h3>Carte des erreurs par touche</h3><div id="kbwrap2" style="overflow-x:auto">${kbHTML({heat:P.__k||{},numpad:true})}</div>
+  <p>Touches les plus échouées : <b>${top}</b></p>
+  ${chartVitesse()}
+  <h3>Derniers exercices</h3>
+  <div class="tw"><table><tr><th>Date</th><th>Leçon</th><th>Vitesse</th><th>Précision</th><th>Note</th><th>Validé</th></tr>
+  ${h.map(x=>`<tr><td>${fmtDate(x.d)}</td><td>${esc(x.l)} · ${esc(x.nm)}${x.ex?' ('+x.ex+')':''}</td><td>${x.mode==='raccourcis'?fr(x.react||0,2)+' s':fr(x.net)}</td><td>${fr(x.p,0)} %</td><td>${fr(x.note)}</td><td>${x.v?'oui':'non'}</td></tr>`).join('')||'<tr><td colspan="6">Aucun exercice pour l’instant.</td></tr>'}</table></div>
+  ${P.__att.length?`<h3>Attestations</h3><ul>${P.__att.map(a=>`<li>${fmtDate(a.d)} · ${fr(a.net)} mots/min · ${fr(a.p)} % · code <b>${esc(a.code)}</b></li>`).join('')}</ul>`:''}
+  <h3>Envoyer mes résultats au formateur</h3>
+  <p><button onclick="sendWA()">Envoyer un résumé sur WhatsApp</button> <button class="sec" onclick="exportCSV()">Télécharger mes résultats (Excel / CSV)</button> <button class="sec" onclick="exportJSON()">Sauvegarder ma progression (fichier)</button></p>
+  <p><label class="note">Restaurer une sauvegarde sur cet ordinateur : <input type="file" accept=".json,application/json" onchange="importJSON(this)"></label></p>
+  <p id="pg-msg" role="status" style="color:var(--title)"></p>
+  <h3>Affichage</h3>
+  <p><label>Thème <select onchange="SET.theme=this.value;saveSet();applySet()">${[['','automatique'],['clair','clair'],['sombre','sombre'],['contraste','contraste élevé']].map(([v,t])=>`<option value="${v}"${SET.theme===v?' selected':''}>${t}</option>`).join('')}</select></label></p>
+  <h3>Zone sensible</h3>
+  <p><button class="sec" onclick="resetP(this)">Réinitialiser ma progression</button> <span class="note">Votre code vous sera demandé.</span></p>
+  <p><button class="sec" onclick="home()">Retour à l’accueil</button></p>`;
+}
+function download(name,content,type){
+  const blob=new Blob([content],{type});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+}
+const slug=s=>strip(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const today=()=>new Date().toISOString().slice(0,10);
+function exportCSV(){
+  const cols=['apprenant','date_heure','niveau','lecon','exercice','intitule','type_exercice','mode_correction','duree_s','caracteres_attendus','frappes_totales','mpm_brut','mpm_net','precision_pct','erreurs_total',...TYPES.map(t=>'err_'+t),'erreurs_corrigees','regularite_pct','hesitations','note_20','etoiles','valide','code_attestation','pertes_focus','frappes_suspectes'];
+  const q=v=>{v=String(v==null?'':v);return /[;"\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+  const rows=P.__h.map(x=>[ME.nom,fmtDate(x.d),String(x.l).split('.')[0],x.l,x.ex,x.nm,x.type,x.mode,x.dur,x.car,x.fr,fr(x.brut||0),fr(x.net||0),fr(x.p||0),x.err,...TYPES.map(t=>(x.t||{})[t]||0),x.corr||0,fr(x.reg||0,0),x.hes||0,fr(x.note||0),x.et||0,x.v?'oui':'non',x.att||'',x.blur||0,x.suspect?'oui':'non']);
+  download(`progression_${slug(ME.nom)}_${today()}.csv`,'\ufeff'+[cols,...rows].map(r=>r.map(q).join(';')).join('\r\n'),'text/csv;charset=utf-8');
+  $('pg-msg').textContent='Fichier téléchargé : envoyez-le à votre formateur sur WhatsApp ou par e-mail.';
+}
+function exportJSON(){
+  const data={schema:'rhb-tuteur-1',organisme:'Rehoboth Skills Academy',version:VERSION,date_export:new Date().toISOString(),apprenant:{id:ME.id,nom:ME.nom},synthese:summary(),progression:P};
+  download(`sauvegarde_${slug(ME.nom)}_${today()}.json`,JSON.stringify(data,null,1),'application/json');
+  $('pg-msg').textContent='Sauvegarde téléchargée. Gardez ce fichier pour retrouver votre progression sur un autre ordinateur.';
+}
+function importJSON(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{try{const d=JSON.parse(r.result);if(d.schema!=='rhb-tuteur-1'||!d.progression)throw 0;
+    if(!confirm(`Remplacer la progression de ce profil par la sauvegarde de « ${d.apprenant&&d.apprenant.nom} » du ${new Date(d.date_export).toLocaleDateString('fr-FR')} ?`))return;
+    P=d.progression;P.__h=P.__h||[];P.__k=P.__k||{};P.__att=P.__att||[];save();showProg();$('pg-msg').textContent='Sauvegarde restaurée.'}
+  catch(e){$('pg-msg').textContent='Ce fichier n’est pas une sauvegarde valide du tuteur.'}};
+  r.readAsText(f);
+}
+function sendWA(){
+  const s=summary();
+  const t=`Bonjour Rehoboth Skills Academy, voici mes résultats du tuteur de frappe.\nApprenant : ${ME.nom}\nLeçons validées : ${s.done}/${LESSONS.length}\n${s.lvl}\nVitesse nette moyenne : ${fr(s.net)} mots/min (meilleure : ${fr(s.best)})\nPrécision moyenne : ${fr(s.p,0)} %\nNote moyenne : ${fr(s.note)}/20\nTemps d’entraînement : ${fr(s.time,0)} min${P.__att.length?'\nAttestation : '+P.__att[P.__att.length-1].code:''}`;
+  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(t),'_blank','noopener');
+}
+function resetP(b){
+  if(ME.pin){const c=prompt('Pour confirmer, entrez votre code à 4 chiffres :');if(c===null)return;if(hashPin(c)!==ME.pin){alert('Code incorrect.');return}}
+  else if(!confirm('Effacer toute la progression de ce profil ?'))return;
+  P={__h:[],__k:{},__att:[]};save();home();
+}
+
+// ============ SIGNALER UN PROBLÈME ============
+function back(){if(ME)(PREV==='prog'?showProg():home());else renderLogin()}
+function feedbackOpen(){
+  const where=cur&&!cur.done?`${cur.L.id} · ${cur.L.name}`:(S&&S.on?`${S.L.id} · ${S.L.name}`:'accueil');
+  PREV=$('prog').classList.contains('hidden')?'home':'prog';
+  cur=null;if(S)S.on=false;
+  show('fb');
+  $('fb-txt').value=`Version : ${VERSION}\nÉcran : ${where}\nNavigateur : ${navigator.userAgent}\nFenêtre : ${innerWidth}x${innerHeight}\nDate : ${new Date().toLocaleString('fr-FR')}\n\nDescription :\n`;
+}
+function fbWhatsApp(){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Retour test tuteur de frappe '+VERSION+'\n'+$('fb-txt').value),'_blank','noopener')}
+function fbMail(){location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Retour tuteur de frappe '+VERSION)+'&body='+encodeURIComponent($('fb-txt').value)}
+function fbCopy(){
+  const t=$('fb-txt'),msg='Message copié. Collez-le dans WhatsApp ou dans un e-mail à '+MAIL+'.';
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t.value).then(()=>$('fb-msg').textContent=msg,()=>fbSelect(t,msg));else fbSelect(t,msg);
+}
+function fbSelect(t,msg){t.focus();t.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}$('fb-msg').textContent=ok?msg:'Sélectionnez le texte ci-dessus, faites Ctrl+C, puis collez-le dans WhatsApp ou un e-mail.'}
+
+$('cont').onclick=()=>{const i=LESSONS.findIndex((_,j)=>status(j)==='current');const li=i<0?0:i;launch(li,nextEx(li))};
+renderLogin();
+</script>
+</body>
+</html>

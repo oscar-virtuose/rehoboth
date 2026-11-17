@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block titre %}Confidentialité{% endblock %}
+{% block contenu %}
+<h1>Politique de confidentialité</h1>
+<p class="lead">Nous attachons de l’importance à la protection de vos données personnelles. {{ page.base_legale }}</p>
+{% for s in page.sections %}
+<h2>{{ s.titre }}</h2>
+<p>{{ s.texte }}</p>
+{% endfor %}
+<p class="note">Dernière mise à jour : {{ page.maj }}.</p>
+{% endblock %}

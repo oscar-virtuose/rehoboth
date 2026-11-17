@@ -1,0 +1,29 @@
+# Configuration Render (Blueprint). Déposer ce fichier à la racine du dépôt.
+# Le disque persistant impose une offre payante (plan starter) : sans lui, les inscriptions seraient effacées au redémarrage.
+services:
+  - type: web
+    name: rehoboth-skills-academy
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 2 -b 0.0.0.0:$PORT app:app
+    healthCheckPath: /
+    envVars:
+      # Version Python : 3.12.7 testée. Pour passer à 3.14, modifier cette valeur,
+      # puis vérifier le premier déploiement (les logs de build indiquent la version utilisée).
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: HTTPS
+        value: "1"
+      - key: SITE_URL
+        sync: false            # à renseigner : https://rehoboth-skills-academy.onrender.com ou votre domaine
+      - key: SECRET_KEY
+        generateValue: true    # généré automatiquement par Render
+      - key: ADMIN_PASSWORD
+        sync: false            # à renseigner dans le tableau de bord, jamais dans le dépôt
+      - key: DATABASE
+        value: /var/data/inscriptions.db
+    disk:
+      name: rehoboth-data
+      mountPath: /var/data
+      sizeGB: 1

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block titre %}Contact{% endblock %}
+{% block description %}Contactez {{ site.nom }} à Yopougon CHU, Abidjan : inscription par WhatsApp au {{ contact.telephone }}, e-mail, Facebook et TikTok.{% endblock %}
+{% block contenu %}
+<h1>Contact et inscription</h1>
+<p class="lead">Pour une demande d’information, un devis ou une inscription, écrivez-nous sur WhatsApp, appelez-nous ou remplissez le formulaire ci-dessous.</p>
+
+<div class="grid">
+  <div class="card">
+    <h2 class="h3">Nous joindre</h2>
+    <ul class="contact">
+      <li><b>WhatsApp :</b> <a href="{{ lien_whatsapp('Bonjour, je souhaite des informations sur vos formations.') }}" target="_blank" rel="noopener">{{ contact.telephone }}</a></li>
+      <li><b>Téléphone :</b> <a href="tel:{{ contact.telephone_lien }}">appeler le {{ contact.telephone }}</a></li>
+      <li><b>E-mail :</b> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></li>
+      <li><b>Facebook :</b> <a href="{{ contact.facebook }}" target="_blank" rel="noopener">{{ contact.facebook_libelle }}</a></li>
+      <li><b>TikTok :</b> <a href="{{ contact.tiktok }}" target="_blank" rel="noopener">{{ contact.tiktok_libelle }}</a></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2 class="h3">Nous trouver</h2>
+    <p><b>Adresse :</b> {{ site.lieu }}. Les détails d’accès vous sont communiqués sur demande.</p>
+    <p><a href="{{ contact.maps }}" target="_blank" rel="noopener">Voir Yopougon CHU sur Google Maps</a></p>
+    <p><b>Horaires :</b> {{ contact.horaires }}</p>
+    <p><b>WhatsApp :</b> disponible 24 h/24.</p>
+  </div>
+</div>
+
+<h2 id="inscription">Formulaire d’inscription</h2>
+<p>Remplissez ce formulaire : une copie de votre demande est envoyée à l’Académie par e-mail, puis un message WhatsApp prêt à envoyer vous est proposé. Les champs marqués d’un astérisque (*) sont obligatoires.</p>
+
+{% if erreurs %}
+<div class="erreurs" role="alert">
+  <p><b>Merci de corriger les points suivants :</b></p>
+  <ul>{% for e in erreurs %}<li>{{ e }}</li>{% endfor %}</ul>
+</div>
+{% endif %}
+{% if erreur_systeme %}
+<div class="erreurs" role="alert"><p>{{ erreur_systeme }}</p></div>
+{% endif %}
+
+<form class="form" method="post" action="{{ url_for('inscription') }}">
+  <label>Nom et prénom *<input name="nom" required maxlength="80" autocomplete="name" value="{{ valeurs.get('nom', '') }}"></label>
+  <label>Votre numéro WhatsApp *<input name="tel" type="tel" required autocomplete="tel" placeholder="+225 …" pattern="\+?[0-9 ().\-]{8,20}" title="Numéro de téléphone, par exemple +225 01 02 03 04 05" value="{{ valeurs.get('tel', '') }}"></label>
+  <label>Votre adresse e-mail *<input name="email" type="email" required maxlength="254" autocomplete="email" value="{{ valeurs.get('email', '') }}"></label>
+  <label>Formation souhaitée *
+    <select name="formation" required>
+      <option value="">Sélectionnez une formation</option>
+      {% set choisie = valeurs.get('formation', preselection) %}
+      {% for f in formations %}<option value="{{ f.slug }}" {% if choisie == f.slug %}selected{% endif %}>{{ f.titre }}</option>{% endfor %}
+      <option value="conseil" {% if choisie == 'conseil' %}selected{% endif %}>Je souhaite être conseillé(e)</option>
+    </select></label>
+  <label>Formule
+    <select name="formule">{% for o in formules_choix %}<option {% if valeurs.get('formule') == o %}selected{% endif %}>{{ o }}</option>{% endfor %}</select></label>
+  <label>Votre niveau
+    <select name="niveau">{% for o in niveaux %}<option {% if valeurs.get('niveau') == o %}selected{% endif %}>{{ o }}</option>{% endfor %}</select></label>
+  <label>Mode d’apprentissage
+    <select name="mode">{% for o in modes_choix %}<option {% if valeurs.get('mode') == o %}selected{% endif %}>{{ o }}</option>{% endfor %}</select></label>
+  <label>Disponibilités (facultatif)<input name="dispo" maxlength="200" placeholder="Par exemple : le soir, le samedi" value="{{ valeurs.get('dispo', '') }}"></label>
+  <label>Votre objectif ou votre question (facultatif)<textarea name="objectif" rows="3" maxlength="1000">{{ valeurs.get('objectif', '') }}</textarea></label>
+
+  <div class="piege" aria-hidden="true">
+    <label>Ne pas remplir <input name="website" tabindex="-1" autocomplete="off"></label>
+  </div>
+
+  <button class="btn" type="submit">Envoyer ma demande</button>
+  <p class="note">Vos informations servent uniquement à répondre à votre demande. Une copie est envoyée à l’adresse e-mail de l’Académie. L’envoi ne réserve pas automatiquement une place. <a href="{{ url_for('confidentialite') }}">Politique de confidentialité</a></p>
+</form>
+
+<h2>Questions fréquentes</h2>
+{% for q in faq %}
+<details><summary>{{ q.question }}</summary><p>{{ q.reponse }}</p></details>
+{% endfor %}
+{% endblock %}

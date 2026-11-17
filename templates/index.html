@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block contenu %}
+<section class="hero">
+<h1>{{ site.slogan }}</h1>
+<p class="lead">{{ site.nom }} vous aide à développer vos compétences pour ouvrir de nouvelles portes : études, emploi ou projets. Bureautique, outils numériques et intelligence artificielle, avec des formations pratiques et accessibles, à Yopougon CHU ou à distance.</p>
+<p><a class="btn" href="{{ url_for('contact') }}#inscription">Je m’inscris</a><a class="btn sec" href="{{ url_for('formations') }}">Voir nos formations</a><a class="btn ghost" href="{{ url_for('entrainement') }}">Essayer le tuteur de frappe</a></p>
+</section>
+
+<h2>Notre promesse</h2>
+<div class="grid">
+  {% for p in promesses %}
+  <div class="card"><h3>{{ p.titre }}</h3><p>{{ p.texte }}</p></div>
+  {% endfor %}
+</div>
+
+<h2>Nos formations</h2>
+<p>Chaque formation existe en formule individuelle, collective ou entreprise.</p>
+<div class="grid">
+  {% for f in offres %}
+  <article class="card{% if f.slug == 'pack' %} accent{% endif %}"><h3>{{ f.titre }}</h3><p>{{ f.accroche }}</p><p><a href="{{ url_for('formations') }}#{{ f.slug }}">En savoir plus<span class="sr"> sur {{ f.titre }}</span></a></p></article>
+  {% endfor %}
+</div>
+<p><a class="btn sec" href="{{ url_for('formations') }}">Voir le détail des formations</a></p>
+
+<h2>Comment s’inscrire</h2>
+<ol class="steps">
+  <li><b>Choisissez votre cours</b> parmi nos formations, ou demandez conseil si vous hésitez.</li>
+  <li><b>Envoyez votre demande</b> avec le formulaire en ligne : il enregistre votre demande et prépare un message WhatsApp.</li>
+  <li><b>Confirmez les détails</b> : notre équipe vous répond sur WhatsApp pour les dates, les modalités et le tarif.</li>
+</ol>
+<p><a class="btn" href="{{ url_for('contact') }}#inscription">Remplir le formulaire d’inscription</a></p>
+{% endblock %}

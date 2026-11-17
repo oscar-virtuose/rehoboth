@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block titre %}Administration{% endblock %}
+{% block head_extra %}<meta name="robots" content="noindex">{% endblock %}
+{% block contenu %}
+<h1>Demandes d’inscription</h1>
+<p>
+  <a href="{{ url_for('admin') }}" {% if not filtre %}class="on"{% endif %}>Toutes</a> ·
+  {% for s in statuts %}<a href="{{ url_for('admin', statut=s) }}">{{ s }}</a>{% if not loop.last %} · {% endif %}{% endfor %}
+  · <a href="{{ url_for('admin_export') }}">Exporter en CSV</a>
+</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Liste des demandes">
+<table>
+  <thead><tr><th scope="col">N°</th><th scope="col">Date</th><th scope="col">Nom</th><th scope="col">WhatsApp</th><th scope="col">E-mail</th><th scope="col">Formation</th><th scope="col">Formule · Niveau · Mode</th><th scope="col">Statut</th></tr></thead>
+  <tbody>
+  {% for l in lignes %}
+  <tr>
+    <th scope="row">{{ l.id }}</th>
+    <td>{{ l.cree_le.replace('T', ' ') }}</td>
+    <td>{{ l.nom }}</td>
+    <td><a href="https://wa.me/{{ l.tel | chiffres }}" target="_blank" rel="noopener">{{ l.tel }}</a></td>
+    <td>{% if l.email %}<a href="mailto:{{ l.email }}">{{ l.email }}</a>{% else %}—{% endif %}</td>
+    <td>{{ l.formation }}</td>
+    <td>{{ l.formule }} · {{ l.niveau }} · {{ l.mode }}{% if l.dispo %}<br><small>Dispo : {{ l.dispo }}</small>{% endif %}{% if l.objectif %}<br><small>{{ l.objectif }}</small>{% endif %}</td>
+    <td>
+      <form method="post" action="{{ url_for('admin_statut', ident=l.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label class="sr" for="s{{ l.id }}">Statut de la demande {{ l.id }}</label>
+        <select id="s{{ l.id }}" name="statut">
+          {% for s in statuts %}<option {% if s == l.statut %}selected{% endif %}>{{ s }}</option>{% endfor %}
+        </select>
+        <button class="btn" type="submit">Enregistrer</button>
+      </form>
+    </td>
+  </tr>
+  {% else %}
+  <tr><td colspan="8">Aucune demande pour l’instant.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

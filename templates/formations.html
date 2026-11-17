@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block titre %}Formations{% endblock %}
+{% block description %}Bureautique, Access, intelligence artificielle : formations pratiques à Yopougon CHU, Abidjan, en individuel, en groupe ou en entreprise, en présentiel ou à distance.{% endblock %}
+{% block contenu %}
+<h1>Nos formations</h1>
+<p class="lead">Chaque formation est disponible en formule individuelle, collective ou entreprise, en présentiel ou à distance. Le tuteur de frappe accompagne tous nos parcours.</p>
+<nav class="sommaire" aria-label="Formations">
+  {% for f in formations %}<a href="#{{ f.slug }}">{{ f.titre }}</a>{% if not loop.last %} · {% endif %}{% endfor %}
+  · <a href="#conseil">Conseil</a> · <a href="#formules">Formules</a>
+</nav>
+
+<div class="stack">
+{% for f in formations %}
+<article class="card formation" id="{{ f.slug }}">
+  <h2>{{ f.titre }}</h2>
+  <p class="promesse">{{ f.accroche }}</p>
+  <p><b>Pour qui :</b> {{ f.pour_qui }}</p>
+  <h3>Contenu</h3>
+  <ul>
+    {% for c in f.contenu %}<li>{% if c.titre %}<b>{{ c.titre }}</b> {% endif %}{{ c.texte }}</li>{% endfor %}
+  </ul>
+  <p class="tuteur"><b>Avec le tuteur de frappe :</b> {{ f.tuteur }}</p>
+  <p><a class="btn" href="{{ lien_whatsapp('Bonjour, je souhaite m’inscrire à la formation ' ~ f.titre ~ '.') }}" target="_blank" rel="noopener">Choisir cette formation<span class="sr"> : {{ f.titre }}</span></a>
+     <a class="btn ghost" href="{{ url_for('contact', formation=f.slug) }}#inscription">Remplir le formulaire</a></p>
+</article>
+{% endfor %}
+
+<article class="card formation" id="conseil">
+  <h2>{{ conseil.titre }}</h2>
+  <p class="promesse">{{ conseil.accroche }}</p>
+  <p>{{ conseil.texte }}</p>
+  <p><a class="btn" href="{{ lien_whatsapp('Bonjour, je souhaite être conseillé(e) pour choisir une formation.') }}" target="_blank" rel="noopener">Demander conseil</a><a class="btn ghost" href="{{ url_for('tuteur') }}">Faire le test de positionnement</a></p>
+</article>
+</div>
+
+<h2 id="formules">Les formules</h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Comparatif des formules">
+  <table>
+    <caption>Comparatif des trois formules proposées pour chaque formation</caption>
+    <thead><tr><th scope="col">Formule</th><th scope="col">Pour qui</th><th scope="col">Fonctionnement</th><th scope="col">Avantages</th></tr></thead>
+    <tbody>
+    {% for f in formules %}
+    <tr><th scope="row">{{ f.nom }}</th><td>{{ f.pour_qui }}</td><td>{{ f.fonctionnement }}</td><td>{{ f.avantages }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="grid">
+  <div class="card"><h3>Modes d’apprentissage</h3><ul>
+    {% for m in modes %}<li><b>{{ m.libelle }}</b> {{ m.texte }}</li>{% endfor %}
+  </ul></div>
+  <div class="card"><h3>Niveaux acceptés</h3><p>{{ niveaux | join(' · ') }}.</p><p>Il n’est pas nécessaire de savoir déjà utiliser un ordinateur pour commencer.</p></div>
+  <div class="card"><h3>Durée et tarif</h3><p>Ils dépendent de la formation et de la formule choisies : ils vous sont communiqués sur WhatsApp lors de votre demande.</p></div>
+</div>
+<p><a class="btn" href="{{ url_for('contact') }}#inscription">Je m’inscris</a><a class="btn sec" href="{{ url_for('contact') }}">Demander des informations</a></p>
+{% endblock %}

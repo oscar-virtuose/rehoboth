@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block titre %}Page introuvable{% endblock %}
+{% block contenu %}
+<h1>Page introuvable</h1>
+<p class="lead">La page que vous cherchez n’existe pas ou a été déplacée.</p>
+<p><a class="btn" href="{{ url_for('index') }}">Retour à l’accueil</a><a class="btn sec" href="{{ url_for('formations') }}">Voir nos formations</a><a class="btn ghost" href="{{ url_for('contact') }}">Nous contacter</a></p>
+{% endblock %}

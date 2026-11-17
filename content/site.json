@@ -1,0 +1,354 @@
+{
+  "site": {
+    "nom": "Rehoboth Skills Academy",
+    "nom_court": "Rehoboth",
+    "initiale": "R",
+    "slogan": "Apprendre aujourd’hui, progresser demain",
+    "description": "Rehoboth Skills Academy, centre de formation à Yopougon CHU, Abidjan : bureautique, Access et intelligence artificielle, avec des formations pratiques et accessibles.",
+    "lieu": "Yopougon CHU, Abidjan, Côte d’Ivoire",
+    "langue": "fr_FR"
+  },
+  "contact": {
+    "whatsapp": "2250103730014",
+    "telephone": "+225 01 03 73 00 14",
+    "telephone_lien": "+2250103730014",
+    "email": "rehobothskillsacademy@gmail.com",
+    "facebook": "https://www.facebook.com/search/top?q=Mr%20Rehoboth",
+    "facebook_libelle": "Mr Rehoboth",
+    "tiktok": "https://www.tiktok.com/@mr_rehoboth",
+    "tiktok_libelle": "@mr_rehoboth",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Yopougon+CHU+Abidjan",
+    "horaires": "Du lundi au vendredi de 8 h à 18 h, le samedi de 8 h à 16 h.",
+    "conservation": "[À définir par l’académie, par exemple : 3 ans après la fin de la formation.]"
+  },
+  "navigation": [
+    {
+      "endpoint": "index",
+      "libelle": "Accueil"
+    },
+    {
+      "endpoint": "a_propos",
+      "libelle": "À propos"
+    },
+    {
+      "endpoint": "formations",
+      "libelle": "Formations"
+    },
+    {
+      "endpoint": "entrainement",
+      "libelle": "Entraînement"
+    },
+    {
+      "endpoint": "contact",
+      "libelle": "Contact"
+    }
+  ],
+  "promesses": [
+    {
+      "titre": "Pratique",
+      "texte": "On apprend en faisant : lettres, CV, tableaux, présentations, bases de données. Chaque séance débouche sur un résultat concret."
+    },
+    {
+      "titre": "Accessible",
+      "texte": "Aucun prérequis pour débuter. Nous vous orientons vers la formation adaptée à votre niveau."
+    },
+    {
+      "titre": "À votre rythme",
+      "texte": "En individuel, en groupe ou pour votre entreprise ; en présentiel à Yopougon ou à distance."
+    },
+    {
+      "titre": "Tournée vers l’avenir",
+      "texte": "En plus de Word, Excel et PowerPoint, apprenez à utiliser l’IA comme un véritable assistant de travail, avec les bons réflexes de vérification."
+    },
+    {
+      "titre": "Mesurable",
+      "texte": "Avec notre tuteur de frappe, vous suivez vos progrès en chiffres : vitesse, précision, compétences acquises."
+    }
+  ],
+  "formations": [
+    {
+      "slug": "bureautique",
+      "titre": "Bureautique",
+      "accroche": "Créez des documents propres, organisez vos données et présentez vos idées avec confiance.",
+      "pour_qui": "Débutants, étudiants, demandeurs d’emploi, salariés.",
+      "contenu": [
+        {
+          "titre": "Initiation à l’informatique et Windows :",
+          "texte": "utiliser l’ordinateur, la souris et le clavier, se repérer dans Windows, créer et ranger ses dossiers et fichiers."
+        },
+        {
+          "titre": "Word :",
+          "texte": "rédiger et mettre en forme des lettres, des CV et des documents professionnels."
+        },
+        {
+          "titre": "Excel :",
+          "texte": "créer des tableaux, utiliser les formules et construire des graphiques."
+        },
+        {
+          "titre": "PowerPoint :",
+          "texte": "concevoir des présentations claires et efficaces."
+        }
+      ],
+      "tuteur": "frappe à l’aveugle sur clavier AZERTY, saisie des accents, chiffres et montants, raccourcis indispensables de Word et Excel (parcours complet, niveaux 0 à 7).",
+      "accueil": true
+    },
+    {
+      "slug": "access",
+      "titre": "Bases de données et Microsoft Access",
+      "accroche": "Découvrez comment structurer, retrouver et gérer l’information.",
+      "pour_qui": "Personnes à l’aise avec les bases de la bureautique qui souhaitent gérer des fichiers clients, des stocks ou des inscriptions.",
+      "contenu": [
+        {
+          "texte": "Comprendre ce qu’est une base de données et à quoi elle sert."
+        },
+        {
+          "texte": "Créer des tables et les relier entre elles."
+        },
+        {
+          "texte": "Construire des requêtes et des formulaires de saisie."
+        },
+        {
+          "texte": "Faire ses premiers pas avec Microsoft Access."
+        }
+      ],
+      "tuteur": "saisie rapide et fiable des données (chiffres, dates, codes), passage d’un champ à l’autre avec Tab, réduction des erreurs de saisie (niveaux 5 et 6).",
+      "accueil": true
+    },
+    {
+      "slug": "ia",
+      "titre": "Initiation à l’intelligence artificielle",
+      "accroche": "Découvrez comment utiliser l’IA comme un assistant pour apprendre et travailler.",
+      "pour_qui": "Étudiants, salariés, entrepreneurs, curieux du numérique.",
+      "contenu": [
+        {
+          "texte": "Comprendre les usages de l’IA et ses limites."
+        },
+        {
+          "texte": "Rédiger de meilleures instructions pour obtenir de meilleurs résultats."
+        },
+        {
+          "texte": "Découvrir des usages professionnels concrets (rédaction, résumé, organisation)."
+        },
+        {
+          "texte": "Adopter de bons réflexes de vérification des réponses."
+        }
+      ],
+      "tuteur": "rédaction fluide et sans fautes des instructions et des textes (niveaux 4 et 7).",
+      "accueil": true
+    },
+    {
+      "slug": "pack",
+      "titre": "Pack Bureautique + IA",
+      "accroche": "La formule la plus complète pour être à l’aise sur tous les outils du bureau d’aujourd’hui et de demain.",
+      "pour_qui": "Toute personne qui veut maîtriser l’ensemble des outils.",
+      "contenu": [
+        {
+          "texte": "L’ensemble de la formation Bureautique (Windows, Word, Excel, PowerPoint)."
+        },
+        {
+          "texte": "Puis l’Initiation à l’intelligence artificielle appliquée à Word, Excel et PowerPoint."
+        }
+      ],
+      "tuteur": "parcours complet jusqu’au test final et à l’attestation de niveau.",
+      "accueil": true
+    }
+  ],
+  "conseil": {
+    "titre": "Conseil et orientation",
+    "accroche": "Vous ne savez pas quelle formation choisir ?",
+    "texte": "Indiquez-nous votre niveau et votre objectif : nous vous conseillons la formation adaptée. Le test de positionnement de 2 minutes du tuteur de frappe peut servir de point de départ à cet échange."
+  },
+  "formules": [
+    {
+      "nom": "Individuelle",
+      "pour_qui": "Personne qui souhaite un accompagnement personnalisé",
+      "fonctionnement": "Cours en tête-à-tête avec le formateur, en présentiel ou à distance",
+      "avantages": "Rythme 100 % adapté, horaires flexibles, progression rapide"
+    },
+    {
+      "nom": "Collective",
+      "pour_qui": "Particuliers, étudiants, demandeurs d’emploi",
+      "fonctionnement": "Sessions en petit groupe, en présentiel ou à distance",
+      "avantages": "Tarif plus accessible, émulation et entraide entre apprenants"
+    },
+    {
+      "nom": "Entreprise",
+      "pour_qui": "Entreprises, administrations, associations",
+      "fonctionnement": "Programme adapté aux besoins de l’équipe, dans vos locaux, au centre ou à distance",
+      "avantages": "Diagnostic du niveau des équipes, contenus liés à vos métiers, rapport de progression remis à la direction"
+    }
+  ],
+  "modes": [
+    {
+      "libelle": "Présentiel",
+      "texte": "au centre de Yopougon CHU (ou dans vos locaux pour la formule Entreprise)."
+    },
+    {
+      "libelle": "À distance",
+      "texte": "selon les modalités de la session choisie."
+    },
+    {
+      "libelle": "À discuter",
+      "texte": "nous le définissons ensemble à l’inscription."
+    }
+  ],
+  "niveaux": [
+    "Débutant",
+    "Quelques notions",
+    "Intermédiaire",
+    "Avancé"
+  ],
+  "formules_choix": [
+    "À discuter",
+    "Individuelle",
+    "Collective",
+    "Entreprise"
+  ],
+  "modes_choix": [
+    "À discuter",
+    "Présentiel",
+    "À distance"
+  ],
+  "raisons": [
+    {
+      "titre": "Des formations pratiques, orientées emploi",
+      "benefice": "Vous êtes opérationnel au bureau, en stage ou dans vos études."
+    },
+    {
+      "titre": "Un tuteur de frappe intégré à chaque parcours",
+      "benefice": "Vous tapez plus vite, sans regarder le clavier, avec moins d’erreurs."
+    },
+    {
+      "titre": "Le choix de la formule : individuelle, collective ou entreprise",
+      "benefice": "Vous apprenez dans le cadre qui vous convient et à votre budget."
+    },
+    {
+      "titre": "Le présentiel ou la distance",
+      "benefice": "Vous vous formez même si vous ne pouvez pas vous déplacer."
+    },
+    {
+      "titre": "Une initiation à l’intelligence artificielle",
+      "benefice": "Vous prenez une longueur d’avance sur les compétences de demain."
+    },
+    {
+      "titre": "Une inscription simple par WhatsApp",
+      "benefice": "Vous obtenez une réponse rapide sur les dates, les modalités et le tarif."
+    }
+  ],
+  "apropos": {
+    "lead": "Rehoboth Skills Academy est un centre de formation installé à Yopougon CHU, Abidjan, fondé par Oscar Vadjebo. Notre ambition : vous aider à développer vos compétences pour ouvrir de nouvelles portes, que ce soit pour vos études, votre emploi ou vos projets.",
+    "mission": "Partir du niveau réel de chaque apprenant, qu’il n’ait jamais touché un ordinateur ou qu’il souhaite se perfectionner, et l’emmener plus loin. Nous voulons que le numérique devienne un allié, pas un obstacle.",
+    "citation": "Le numérique doit devenir votre allié, pas un obstacle. Savoir taper vite et juste, maîtriser Word, Excel et PowerPoint, organiser l’information et utiliser l’IA intelligemment, c’est gagner du temps chaque jour et se donner de vraies chances. C’est ce que nous voulons offrir à chacun de nos apprenants.",
+    "citation_auteur": "Oscar Vadjebo, fondateur",
+    "approche": [
+      {
+        "titre": "Pratique :",
+        "texte": "chaque séance débouche sur un résultat concret (lettre, CV, tableau, présentation, base de données)."
+      },
+      {
+        "titre": "Accessible :",
+        "texte": "aucun prérequis pour débuter, un conseil pour choisir la bonne formation."
+      },
+      {
+        "titre": "À votre rythme :",
+        "texte": "individuel, groupe ou entreprise ; présentiel ou distance."
+      },
+      {
+        "titre": "Tournée vers l’avenir :",
+        "texte": "l’IA utilisée comme un assistant, avec les bons réflexes de vérification."
+      },
+      {
+        "titre": "Mesurable :",
+        "texte": "vitesse, précision et compétences suivies grâce au tuteur de frappe."
+      }
+    ]
+  },
+  "entrainement": {
+    "lead": "Des outils pour vous entraîner en complément de nos formations, gratuitement et à votre rythme.",
+    "tuteur": {
+      "titre": "Tuteur de frappe AZERTY",
+      "texte": "Apprenez à taper sans regarder le clavier, des lettres aux raccourcis Word et Excel. Vos progrès sont mesurés en vitesse, en précision et en note sur 20.",
+      "points": [
+        "8 niveaux, 44 leçons : posture et test de positionnement, rangée de base, rangées du haut et du bas, majuscules et accents, chiffres et pavé numérique, raccourcis et touches de fonction, textes professionnels.",
+        "Correction en temps réel avec des conseils adaptés à vos erreurs.",
+        "Test final de 3 minutes et attestation de niveau imprimable, avec un code de vérification.",
+        "Page « Mes progrès » : historique, carte des touches à revoir, export de vos résultats à envoyer à votre formateur."
+      ]
+    },
+    "bientot": {
+      "titre": "Nouveaux exercices",
+      "texte": "D’autres activités d’entraînement arriveront prochainement sur cette page."
+    },
+    "avant_de_commencer": [
+      {
+        "titre": "Un ordinateur avec clavier",
+        "texte": "Le tuteur se pratique sur un ordinateur muni d’un clavier physique AZERTY. Il n’est pas adapté aux téléphones ni aux tablettes."
+      },
+      {
+        "titre": "La bonne posture",
+        "texte": "Dos droit, pieds à plat, poignets légers, écran à hauteur des yeux. Les index reposent sur les repères des touches F et J."
+      },
+      {
+        "titre": "15 à 20 minutes par jour",
+        "texte": "Une pratique courte et régulière est plus efficace qu’une longue séance. Le tuteur vous propose une pause toutes les 20 minutes."
+      }
+    ],
+    "progression": [
+      "Créez votre profil avec un code à 4 chiffres : plusieurs apprenants peuvent utiliser le même ordinateur sans mélanger leurs résultats.",
+      "La progression est enregistrée uniquement dans le navigateur de l’ordinateur utilisé. Si vous changez d’ordinateur ou effacez les données du navigateur, elle n’est pas conservée.",
+      "Pensez à utiliser « Sauvegarder » dans la page « Mes progrès » pour garder une copie, et « Exporter » pour envoyer vos résultats à votre formateur."
+    ]
+  },
+  "faq": [
+    {
+      "question": "Faut-il savoir utiliser un ordinateur pour commencer ?",
+      "reponse": "Non. La formation Bureautique commence par l’initiation à l’informatique et à Windows. Nous partons de votre niveau réel."
+    },
+    {
+      "question": "Peut-on suivre la formation à distance ?",
+      "reponse": "Oui, selon les modalités disponibles pour la session choisie. Indiquez « À distance » dans le formulaire et nous vous expliquerons le fonctionnement."
+    },
+    {
+      "question": "Comment ma place est-elle confirmée ?",
+      "reponse": "Après réception de votre message WhatsApp, notre équipe vous répond pour confirmer les dates, les modalités et le tarif. L’envoi du formulaire seul ne réserve pas de place."
+    },
+    {
+      "question": "Proposez-vous des formations pour les entreprises ?",
+      "reponse": "Oui. La formule Entreprise propose un programme adapté à votre équipe, dans vos locaux, au centre ou à distance, avec un rapport de progression remis à la direction."
+    },
+    {
+      "question": "Combien coûte une formation ?",
+      "reponse": "Le tarif dépend de la formation et de la formule (individuelle, collective ou entreprise). Il vous est communiqué sur WhatsApp lors de votre demande."
+    }
+  ],
+  "confidentialite": {
+    "maj": "novembre 2026",
+    "sections": [
+      {
+        "titre": "Responsable",
+        "texte": "Rehoboth Skills Academy, Yopougon CHU, Abidjan, Côte d’Ivoire — rehobothskillsacademy@gmail.com — +225 01 03 73 00 14."
+      },
+      {
+        "titre": "Données collectées",
+        "texte": "Nom et prénom, adresse e-mail, numéro WhatsApp, formation souhaitée, formule, niveau, mode d’apprentissage, disponibilités et objectif, uniquement lorsque vous remplissez le formulaire d’inscription. Une copie de la demande est envoyée à l’adresse e-mail de l’Académie."
+      },
+      {
+        "titre": "Utilisation",
+        "texte": "Ces informations servent uniquement à répondre à votre demande et à organiser votre formation. Elles ne sont ni vendues ni transmises à des tiers. Les échanges par WhatsApp sont soumis aux conditions de ce service."
+      },
+      {
+        "titre": "Tuteur de frappe",
+        "texte": "Votre profil, votre code et votre progression sont enregistrés uniquement dans le navigateur de l’ordinateur utilisé. Ils ne sont pas envoyés sur Internet. Ils ne nous parviennent que si vous choisissez de nous envoyer vous-même un export ou un résumé."
+      },
+      {
+        "titre": "Durée de conservation",
+        "texte": "[À définir par l’académie, par exemple : 3 ans après la fin de la formation.]"
+      },
+      {
+        "titre": "Vos droits",
+        "texte": "Vous pouvez demander l’accès, la rectification ou la suppression de vos données, sur simple demande par e-mail ou par WhatsApp."
+      }
+    ],
+    "base_legale": "Ce site applique la loi ivoirienne n° 2013-450 du 19 juin 2013 relative à la protection des données à caractère personnel."
+  }
+}

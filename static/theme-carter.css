@@ -1,0 +1,297 @@
+/* Thème Carter : palette anthracite et orange, bordures animées.
+   Chargé après style.css, il surcharge les couleurs et ajoute les animations. */
+
+@property --angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+:root {
+  --or: #E8651A;
+  --or-clair: #F5894A;
+  --bg: #181715;
+  --bg2: #232220;
+  --carte: #262524;
+  --texte: #F4F1EC;
+  --doux: #BDB8B0;
+  --ligne: #3a3734;
+}
+
+html { background: var(--bg); }
+body {
+  background: var(--bg);
+  color: var(--doux);
+  font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+h1, h2, h3, .brand-long, .brand-short, .logo {
+  font-family: "Comfortaa", "Figtree", system-ui, sans-serif;
+  color: var(--texte);
+}
+b, strong { color: var(--texte); }
+a { color: var(--or-clair); text-decoration: none; transition: color .2s; }
+a:hover { color: #fff; }
+::selection { background: var(--or); color: #fff; }
+
+/* ---------- Cadre animé autour de chaque page ---------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 10px;
+  border-radius: 24px;
+  pointer-events: none;
+  z-index: 50;
+  padding: 1px;
+  background: conic-gradient(from var(--angle),
+    transparent 0deg, rgba(232,101,26,.95) 45deg, transparent 100deg,
+    transparent 200deg, rgba(232,101,26,.45) 240deg, transparent 290deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: tourne 9s linear infinite;
+}
+
+/* ---------- En-tête ---------- */
+header {
+  background: rgba(24,23,21,.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+header::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--or), #fff3, var(--or), transparent);
+  background-size: 200% 100%;
+  animation: glisse 4s linear infinite;
+  pointer-events: none;
+}
+header nav a { color: var(--doux); }
+header nav a:hover, header nav a.on { color: var(--or); }
+header nav a.on { position: relative; }
+header nav a.on::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px;
+  height: 2px; background: var(--or); border-radius: 2px;
+}
+.btn-nav { background: var(--or) !important; color: #fff !important; }
+
+/* ---------- Boutons ---------- */
+.btn {
+  background: var(--or);
+  color: #fff;
+  border: 1.5px solid var(--or);
+  border-radius: 999px;
+  padding: 12px 26px;
+  display: inline-block;
+  font-weight: 600;
+  transition: transform .2s ease, box-shadow .25s ease, background .2s;
+}
+.btn:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(232,101,26,.7);
+}
+.btn.sec { background: transparent; color: var(--or-clair); border-color: var(--or); }
+.btn.sec:hover { background: rgba(232,101,26,.12); color: #fff; }
+.btn.ghost { background: transparent; color: var(--texte); border-color: var(--ligne); }
+.btn.ghost:hover { border-color: var(--or); color: var(--or-clair); }
+
+/* ---------- Accueil ---------- */
+.hero { position: relative; isolation: isolate; }
+.hero::before {
+  content: "";
+  position: absolute;
+  right: -12%; top: -30%;
+  width: 62%; height: 150%;
+  background: radial-gradient(closest-side, rgba(232,101,26,.32), transparent 70%);
+  filter: blur(28px);
+  z-index: -1;
+  pointer-events: none;
+  animation: respire 7s ease-in-out infinite;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 6.5vw, 4.8rem);
+  line-height: 1.04;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+}
+.hero h1::after { content: "."; color: var(--or); }
+.hero .lead { color: var(--texte); font-size: 1.15rem; }
+
+h2 { color: var(--texte); }
+.lead { color: var(--texte); }
+.steps li {
+  transition: background .25s ease, color .25s ease, transform .25s ease,
+              box-shadow .25s ease;
+}
+.steps li:hover {
+  background: var(--or);
+  color: var(--bg);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -14px rgba(232,101,26,.8);
+}
+.steps li:hover b { color: var(--bg); }
+.steps li::before { transition: background .25s ease, color .25s ease; }
+.steps li:hover::before { background: var(--bg); color: var(--or-clair); }
+p.note, .note { color: #8f8a83; }
+.tag {
+  background: rgba(232,101,26,.15);
+  color: var(--or-clair);
+  border: 1px solid rgba(232,101,26,.4);
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.tag-gris { background: rgba(255,255,255,.06); color: var(--doux); border-color: var(--ligne); }
+
+/* ---------- Cartes à bordure animée ---------- */
+.card {
+  position: relative;
+  isolation: isolate;
+  background: var(--carte);
+  border: none;
+  border-radius: 20px;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--angle),
+    transparent 0deg, transparent 230deg, var(--or) 300deg, #fff5 330deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: .35;
+  transition: opacity .4s ease;
+  animation: tourne 6s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px -20px rgba(232,101,26,.55);
+}
+.card:hover::before { opacity: 1; }
+.card h3 { color: var(--texte); }
+.card.large { border: none; }
+.card a { color: var(--or-clair); }
+
+/* Cartes d'accent orange, à utiliser pour mettre une offre en avant */
+.card.accent { background: var(--or); }
+.card.accent h2, .card.accent h3, .card.accent p, .card.accent li, .card.accent b { color: #fff; }
+
+/* ---------- Formations ---------- */
+.formation h2 { color: var(--texte); }
+.sommaire a { color: var(--or-clair); }
+.promesse { color: var(--texte); font-size: 1.05rem; }
+.benef { color: var(--or-clair); font-weight: 600; }
+.tuteur {
+  background: var(--bg2);
+  color: var(--texte);
+  border-left: 3px solid var(--or);
+  padding-left: 14px;
+}
+
+/* ---------- Listes, citations, questions ---------- */
+ul li::marker { color: var(--or); }
+blockquote {
+  border-left: 3px solid var(--or);
+  margin: 2rem 0;
+  padding: 6px 0 6px 20px;
+  font-size: 1.2rem;
+  color: var(--texte);
+  font-family: "Comfortaa", sans-serif;
+}
+blockquote b { color: var(--or-clair); font-family: "Figtree", sans-serif; }
+details {
+  border-bottom: 1px solid var(--ligne);
+  padding: 14px 0;
+}
+summary { color: var(--texte); cursor: pointer; font-weight: 600; }
+summary:hover { color: var(--or-clair); }
+
+/* ---------- Tableaux ---------- */
+.table-wrap { border: 1px solid var(--ligne); border-radius: 16px; background: var(--bg2); }
+table { color: var(--doux); }
+th { color: var(--texte); border-bottom: 1px solid var(--ligne); }
+td { border-bottom: 1px solid var(--ligne); }
+tbody tr { transition: background .2s; }
+tbody tr:hover { background: rgba(232,101,26,.06); }
+
+/* ---------- Formulaire ---------- */
+.form label { color: var(--doux); }
+.form input, .form select, .form textarea {
+  background: var(--bg2);
+  color: var(--texte);
+  border: 1px solid var(--ligne);
+  border-radius: 12px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.form input:focus, .form select:focus, .form textarea:focus {
+  outline: none;
+  border-color: var(--or);
+  box-shadow: 0 0 0 4px rgba(232,101,26,.22);
+}
+.erreurs { background: rgba(220,38,38,.12); color: #fca5a5; border: 1px solid rgba(220,38,38,.35); }
+.erreurs p, .erreurs li { color: #fca5a5; }
+.ok { color: var(--or-clair); }
+table select { background: var(--bg2); color: var(--texte); border-color: var(--ligne); }
+
+/* ---------- Pied de page ---------- */
+footer {
+  background: #11100f;
+  border-top: 1px solid var(--ligne);
+  color: var(--doux);
+  position: relative;
+}
+footer::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--or), transparent);
+  background-size: 200% 100%;
+  animation: glisse 6s linear infinite;
+}
+footer a { color: var(--doux); }
+footer a:hover { color: var(--or); }
+
+/* ---------- Bouton WhatsApp flottant ---------- */
+.wa-float {
+  background: var(--or);
+  color: #fff;
+  border-radius: 999px;
+  animation: pulse 2.4s ease-out infinite;
+}
+.wa-float:hover { color: #fff; transform: scale(1.05); }
+
+/* ---------- Apparition au défilement (activée seulement avec JavaScript) ---------- */
+.js .reveal:not(.visible) { opacity: 0; transform: translateY(26px); }
+.reveal { transition: opacity .7s ease, transform .7s ease, box-shadow .35s ease; }
+
+/* ---------- Animations ---------- */
+@keyframes tourne { to { --angle: 360deg; } }
+@keyframes glisse { to { background-position: 200% 0; } }
+@keyframes respire { 0%, 100% { opacity: .75; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(232,101,26,.6); }
+  70%  { box-shadow: 0 0 0 18px rgba(232,101,26,0); }
+  100% { box-shadow: 0 0 0 0 rgba(232,101,26,0); }
+}
+
+/* ---------- Accessibilité : réduire le mouvement si demandé ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .js .reveal:not(.visible) { opacity: 1; transform: none; }
+}
+@media print {
+  body::after, header::after, footer::before { display: none; }
+}

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block titre %}Demande enregistrée{% endblock %}
+{% block contenu %}
+<h1>Votre demande est enregistrée</h1>
+<p class="ok" role="status">Demande n° {{ ref }} reçue. Une copie a été envoyée à l’adresse e-mail de l’Académie.</p>
+<p>Vous pouvez également envoyer le message préparé ci-dessous sur WhatsApp pour échanger avec notre équipe et confirmer les détails. L’envoi ne réserve pas automatiquement une place.</p>
+<p><a class="btn" href="{{ lien }}" target="_blank" rel="noopener">Ouvrir WhatsApp avec mon message</a><a class="btn sec" href="{{ url_for('index') }}">Retour à l’accueil</a></p>
+{% endblock %}

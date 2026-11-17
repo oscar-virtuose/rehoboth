@@ -1,0 +1,14 @@
+# Données réelles et sauvegardes : ne jamais les publier sur GitHub
+data/
+sauvegardes/
+*.db
+*.csv
+
+# Secrets et environnement local
+.env
+*.wsgi
+
+# Fichiers Python générés
+__pycache__/
+*.pyc
+.venv/

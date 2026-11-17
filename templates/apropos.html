@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block titre %}À propos{% endblock %}
+{% block contenu %}
+<h1>À propos</h1>
+<p class="lead">{{ page.lead }}</p>
+
+<h2>Notre mission</h2>
+<p>{{ page.mission }}</p>
+
+<blockquote>« {{ page.citation }} »<br><b>{{ page.citation_auteur }}</b></blockquote>
+
+<h2>Notre approche</h2>
+<ul class="checks">
+  {% for a in page.approche %}<li><b>{{ a.titre }}</b> {{ a.texte }}</li>{% endfor %}
+</ul>
+
+<h2>Pourquoi nous choisir</h2>
+<div class="grid">
+  {% for r in raisons %}
+  <div class="card"><h3>{{ r.titre }}</h3><p><span class="benef">Ce que cela change pour vous :</span> {{ r.benefice }}</p></div>
+  {% endfor %}
+</div>
+
+<section class="cta">
+  <h2>Discutons de votre projet</h2>
+  <p>Dites-nous votre niveau et votre objectif : nous vous conseillons la formation adaptée.</p>
+  <p><a class="btn" href="{{ url_for('contact') }}#inscription">Je m’inscris</a><a class="btn sec" href="{{ lien_whatsapp('Bonjour, je souhaite être conseillé(e) pour choisir une formation.') }}" target="_blank" rel="noopener">Demander conseil sur WhatsApp</a></p>
+</section>
+{% endblock %}

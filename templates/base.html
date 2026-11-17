@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block titre %}{% endblock %}{% if self.titre()|trim %} · {% endif %}{{ site.nom }}</title>
+<meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
+<link rel="canonical" href="{{ url_absolue(request.path) }}">
+<meta property="og:title" content="{% block og_titre %}{{ site.nom }}{% endblock %}">
+<meta property="og:description" content="{% block og_description %}{{ site.description }}{% endblock %}">
+<meta property="og:image" content="{{ url_absolue(url_for('static', filename='apercu.png')) }}">
+<meta property="og:url" content="{{ url_absolue(request.path) }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="{{ site.langue }}">
+<meta name="theme-color" content="#1e3a5f">
+<link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='theme-carter.css') }}">
+{% block head_extra %}{% endblock %}
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header><div class="wrap">
+  <a class="brand" href="{{ url_for('index') }}"><span class="logo" aria-hidden="true">{{ site.initiale }}</span><span class="brand-long">{{ site.nom }}</span><span class="brand-short">{{ site.nom_court }}</span></a>
+  <nav aria-label="Menu principal">
+    {% for lien in navigation %}
+    <a href="{{ url_for(lien.endpoint) }}" {% if request.endpoint == lien.endpoint %}class="on" aria-current="page"{% endif %}>{{ lien.libelle }}</a>
+    {% endfor %}
+    <a href="{{ url_for('contact') }}#inscription" class="btn-nav">S’inscrire</a>
+  </nav>
+</div></header>
+
+<main class="wrap" id="contenu" tabindex="-1">
+{% block contenu %}{% endblock %}
+</main>
+
+<footer><div class="wrap foot">
+  <div><b>{{ site.nom }}</b><br>{{ site.lieu }}<br><a href="tel:{{ contact.telephone_lien }}">{{ contact.telephone }}</a> · <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></div>
+  <div><a href="{{ lien_whatsapp() }}" target="_blank" rel="noopener">WhatsApp</a> · <a href="{{ contact.facebook }}" target="_blank" rel="noopener">Facebook</a> · <a href="{{ contact.tiktok }}" target="_blank" rel="noopener">TikTok</a><br><a href="{{ url_for('confidentialite') }}">Confidentialité</a> · <a href="{{ url_for('contact') }}">Contact</a></div>
+  <div class="copy">© {{ annee }} {{ site.nom }} · {{ site.slogan }}</div>
+</div></footer>
+
+<a class="wa-float" href="{{ lien_whatsapp('Bonjour ' ~ site.nom ~ ', je souhaite des informations sur vos formations.') }}" target="_blank" rel="noopener" aria-label="Nous écrire sur WhatsApp">WhatsApp</a>
+<script>
+/* Apparition des blocs au défilement. Sans JavaScript, tout reste visible. */
+(function () {
+  document.documentElement.classList.add('js');
+  var cibles = document.querySelectorAll('.card, .formation, blockquote, .cta, .table-wrap');
+  cibles.forEach(function (el) { el.classList.add('reveal'); });
+  if (!('IntersectionObserver' in window)) {
+    cibles.forEach(function (el) { el.classList.add('visible'); });
+    return;
+  }
+  var observateur = new IntersectionObserver(function (entrees) {
+    entrees.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observateur.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  cibles.forEach(function (el) { observateur.observe(el); });
+})();
+</script>
+</body>
+</html>
