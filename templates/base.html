@@ -25,7 +25,7 @@
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
 <header><div class="wrap">
-  <a class="brand" href="{{ url_for('index') }}"><span class="logo" aria-hidden="true">{{ site.initiale }}</span><span class="brand-long">{{ site.nom }}</span><span class="brand-short">{{ site.nom_court }}</span></a>
+  <a class="brand" href="{{ url_for('index') }}"><img class="brand-emblem" src="{{ url_for('static', filename='emblem-rehoboth.png') }}" alt="" width="46" height="46"><span class="brand-long">{{ site.nom }}</span><span class="brand-short">{{ site.nom_court }}</span></a>
   <nav aria-label="Menu principal">
     {% for lien in navigation %}
     <a href="{{ url_for(lien.endpoint) }}" {% if request.endpoint == lien.endpoint %}class="on" aria-current="page"{% endif %}>{{ lien.libelle }}</a>

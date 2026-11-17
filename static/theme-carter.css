@@ -295,3 +295,14 @@ footer a:hover { color: var(--or); }
 @media print {
   body::after, header::after, footer::before { display: none; }
 }
+
+/* Emblème dans l'en-tête, à côté du nom */
+.brand{gap:12px}
+.brand-emblem{display:block;width:46px;height:46px;border-radius:12px;background:#fff;padding:3px;box-shadow:0 6px 16px -8px rgba(0,0,0,.6);transition:transform .25s ease;flex-shrink:0}
+.brand:hover .brand-emblem{transform:rotate(-4deg) scale(1.05)}
+.brand-long,.brand-short{font-family:"Comfortaa","Figtree",system-ui,sans-serif;font-weight:700;letter-spacing:.01em;color:#fff}
+@media (max-width:640px){.brand-emblem{width:40px;height:40px}}
+
+/* Logo complet sur la page d'accueil */
+.hero-logo{display:block;width:min(380px,82vw);height:auto;background:#fff;border-radius:20px;padding:14px 18px;margin:0 0 26px;box-shadow:0 18px 40px -18px rgba(232,101,26,.55);transition:transform .35s ease,box-shadow .35s ease}
+.hero-logo:hover{transform:translateY(-3px);box-shadow:0 26px 50px -18px rgba(232,101,26,.7)}
