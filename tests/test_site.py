@@ -184,4 +184,14 @@ assert r.status_code == 400; print("attaque CSRF simulée -> 400 OK")
 assert "inscrit" in c.get("/admin?statut=inscrit", headers=auth).get_data(as_text=True)
 print("TESTS CSRF PASSENT")
 
+# ---------- Partie 3 : Google Analytics ----------
+A.app.config["GA_MEASUREMENT_ID"] = ""
+assert "googletagmanager" not in c.get("/").get_data(as_text=True), "suivi actif sans identifiant"
+A.app.config["GA_MEASUREMENT_ID"] = "G-TEST123AB"
+assert "gtag/js?id=G-TEST123AB" in c.get("/").get_data(as_text=True), "suivi absent"
+A.app.config["GA_MEASUREMENT_ID"] = "<script>alert(1)</script>"
+assert "googletagmanager" not in c.get("/").get_data(as_text=True), "identifiant invalide accepté"
+A.app.config["GA_MEASUREMENT_ID"] = ""
+print("Google Analytics : OK")
+
 print('=== TOUS LES TESTS SONT PASSÉS ===')

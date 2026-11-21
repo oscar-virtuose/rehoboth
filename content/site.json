@@ -341,6 +341,10 @@
         "texte": "Votre profil, votre code et votre progression sont enregistrés uniquement dans le navigateur de l’ordinateur utilisé. Ils ne sont pas envoyés sur Internet. Ils ne nous parviennent que si vous choisissez de nous envoyer vous-même un export ou un résumé."
       },
       {
+        "titre": "Mesure d’audience",
+        "texte": "Le site utilise Google Analytics pour connaître les pages consultées, la durée des visites et les pays d’origine des visiteurs. Ce service dépose des cookies et traite des identifiants techniques. Les données servent uniquement à améliorer le site. Si aucun identifiant de mesure n’est configuré, aucun suivi n’est actif. Vous pouvez refuser les cookies dans votre navigateur ou installer le module de désactivation de Google Analytics."
+      },
+      {
         "titre": "Durée de conservation",
         "texte": "[À définir par l’académie, par exemple : 3 ans après la fin de la formation.]"
       },

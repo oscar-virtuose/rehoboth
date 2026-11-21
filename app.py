@@ -34,6 +34,8 @@ app.config.update(
     # Sans mot de passe défini, l'administration reste désactivée (404).
     ADMIN_PASSWORD=os.environ.get("ADMIN_PASSWORD", ""),
     # Doit être fixé en production : sinon chaque worker a sa propre clé.
+    # Identifiant Google Analytics (ex. G-XXXXXXXXXX). Vide = aucun suivi.
+    GA_MEASUREMENT_ID=os.environ.get("GA_MEASUREMENT_ID", "").strip(),
     SECRET_KEY=os.environ.get("SECRET_KEY") or secrets.token_hex(32),
     SMTP_HOST=os.environ.get("SMTP_HOST", "smtp.gmail.com"),
     SMTP_PORT=int(os.environ.get("SMTP_PORT", "587")),
@@ -69,6 +71,12 @@ def lien_whatsapp(texte=None):
     return url
 
 
+def ga_id_valide():
+    """Renvoie l'identifiant GA4 seulement s'il a le bon format (évite toute injection dans la page)."""
+    identifiant = app.config.get("GA_MEASUREMENT_ID", "")
+    return identifiant if re.fullmatch(r"G-[A-Z0-9]{4,20}", identifiant or "") else ""
+
+
 def jeton_csrf():
     """Jeton stocké dans la session du navigateur, à renvoyer avec chaque formulaire admin."""
     if "csrf" not in session:
@@ -97,6 +105,7 @@ def injecter_contenu():
         "lien_whatsapp": lien_whatsapp,
         "url_absolue": lambda chemin: app.config["SITE_URL"] + chemin,
         "csrf_token": jeton_csrf,
+        "ga_id": ga_id_valide(),
     }
 
 

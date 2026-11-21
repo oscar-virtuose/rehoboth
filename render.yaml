@@ -21,6 +21,8 @@ services:
         generateValue: true    # généré automatiquement par Render
       - key: ADMIN_PASSWORD
         sync: false            # à renseigner dans le tableau de bord, jamais dans le dépôt
+      - key: GA_MEASUREMENT_ID
+        sync: false            # facultatif : identifiant G-XXXXXXXXXX, vide = aucun suivi
       - key: DATABASE
         value: /var/data/inscriptions.db
     disk:
