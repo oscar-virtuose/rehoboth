@@ -126,7 +126,8 @@ assert c.get("/admin").status_code == 401
 assert c.get("/admin", headers={"Authorization": "Basic " + base64.b64encode(b"admin:mauvais").decode()}).status_code == 401
 auth = {"Authorization": "Basic " + base64.b64encode(b"admin:secret").decode()}
 h = c.get("/admin", headers=auth).get_data(as_text=True)
-assert "Awa Koné" in h and "awa@example.com" in h and "wa.me/225" in h
+manquants = [x for x in ["Awa Koné", "awa@example.com", "wa.me/225"] if x not in h]
+assert not manquants, f"administration : éléments absents {manquants} (longueur de la page : {len(h)} caractères)"
 print("admin liste OK")
 jeton = re.search(r'name="csrf_token" value="([^"]+)"', c.get("/admin", headers=auth).get_data(as_text=True)).group(1)
 r = c.post("/admin/1/statut", data={"statut": "inscrit", "csrf_token": jeton}, headers=auth); assert r.status_code == 302
