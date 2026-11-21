@@ -342,7 +342,7 @@
       },
       {
         "titre": "Mesure d’audience",
-        "texte": "Le site utilise Google Analytics pour connaître les pages consultées, la durée des visites et les pays d’origine des visiteurs. Ce service dépose des cookies et traite des identifiants techniques. Les données servent uniquement à améliorer le site. Si aucun identifiant de mesure n’est configuré, aucun suivi n’est actif. Vous pouvez refuser les cookies dans votre navigateur ou installer le module de désactivation de Google Analytics."
+        "texte": "Le site utilise Google Tag Manager pour déclencher Google Analytics, afin de connaître les pages consultées, la durée des visites et les pays d’origine des visiteurs. Ces services déposent des cookies et traitent des identifiants techniques. Les données servent uniquement à améliorer le site. Si aucun identifiant n’est configuré, aucun suivi n’est actif. Vous pouvez refuser les cookies dans votre navigateur ou installer le module de désactivation de Google Analytics."
       },
       {
         "titre": "Durée de conservation",

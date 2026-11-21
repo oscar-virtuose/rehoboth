@@ -36,6 +36,8 @@ app.config.update(
     # Doit être fixé en production : sinon chaque worker a sa propre clé.
     # Identifiant Google Analytics (ex. G-XXXXXXXXXX). Vide = aucun suivi.
     GA_MEASUREMENT_ID=os.environ.get("GA_MEASUREMENT_ID", "").strip(),
+    # Conteneur Google Tag Manager (ex. GTM-XXXXXXX). Vide = aucun suivi.
+    GTM_CONTAINER_ID=os.environ.get("GTM_CONTAINER_ID", "").strip(),
     SECRET_KEY=os.environ.get("SECRET_KEY") or secrets.token_hex(32),
     SMTP_HOST=os.environ.get("SMTP_HOST", "smtp.gmail.com"),
     SMTP_PORT=int(os.environ.get("SMTP_PORT", "587")),
@@ -77,6 +79,12 @@ def ga_id_valide():
     return identifiant if re.fullmatch(r"G-[A-Z0-9]{4,20}", identifiant or "") else ""
 
 
+def gtm_id_valide():
+    """Renvoie l'identifiant du conteneur GTM seulement s'il a le bon format."""
+    identifiant = app.config.get("GTM_CONTAINER_ID", "")
+    return identifiant if re.fullmatch(r"GTM-[A-Z0-9]{4,20}", identifiant or "") else ""
+
+
 def jeton_csrf():
     """Jeton stocké dans la session du navigateur, à renvoyer avec chaque formulaire admin."""
     if "csrf" not in session:
@@ -106,6 +114,7 @@ def injecter_contenu():
         "url_absolue": lambda chemin: app.config["SITE_URL"] + chemin,
         "csrf_token": jeton_csrf,
         "ga_id": ga_id_valide(),
+        "gtm_id": gtm_id_valide(),
     }
 
 

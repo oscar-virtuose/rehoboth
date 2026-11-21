@@ -192,6 +192,14 @@ assert "gtag/js?id=G-TEST123AB" in c.get("/").get_data(as_text=True), "suivi abs
 A.app.config["GA_MEASUREMENT_ID"] = "<script>alert(1)</script>"
 assert "googletagmanager" not in c.get("/").get_data(as_text=True), "identifiant invalide accepté"
 A.app.config["GA_MEASUREMENT_ID"] = ""
+A.app.config["GTM_CONTAINER_ID"] = ""
+assert "googletagmanager.com/gtm.js" not in c.get("/").get_data(as_text=True), "GTM actif sans identifiant"
+A.app.config["GTM_CONTAINER_ID"] = "GTM-PN5NXJBD"
+h = c.get("/").get_data(as_text=True)
+assert "gtm.js?id='+i" in h and "ns.html?id=GTM-PN5NXJBD" in h, "GTM absent"
+A.app.config["GTM_CONTAINER_ID"] = "GTM-PN5NXJBDGTM-PN5NXJBD"
+assert "ns.html?id=GTM-" not in c.get("/").get_data(as_text=True), "identifiant GTM invalide accepté"
+A.app.config["GTM_CONTAINER_ID"] = ""
 print("Google Analytics : OK")
 
 print('=== TOUS LES TESTS SONT PASSÉS ===')
