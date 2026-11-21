@@ -21,6 +21,11 @@ os.environ["DATABASE"] = tempfile.mktemp(suffix=".db")
 os.environ["ADMIN_PASSWORD"] = "secret"
 os.environ["SECRET_KEY"] = "test-key"
 os.environ["SITE_URL"] = "https://rehoboth.example"
+# Le test ne doit dépendre d'aucune configuration de production (~/rehoboth.env) :
+os.environ["ADMIN_USER"] = "admin"
+os.environ["HTTPS"] = "0"
+os.environ["GA_MEASUREMENT_ID"] = ""
+os.environ["GTM_CONTAINER_ID"] = ""
 
 import app as A  # noqa: E402
 
